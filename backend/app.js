@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
 const patientRouter = require('./routers/patientRouter');
+const ErrorCodes = require('./utils/ErrorCodes');
 
 // Connect to DB
 const DBURL = process.env.DBURL || 'mongodb://localhost:27017/finddoctor';
@@ -33,7 +34,7 @@ app.use('/', (req, res, next) => {
 // Error handling
 app.use((err, req, res, next) => {
     console.log(err);
-    res.status(500).json({ error: err });
+    res.status(ErrorCodes.INTERNAL_ERROR).json({ error: err });
 });
 
 app.listen(PORT, () => {

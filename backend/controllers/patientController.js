@@ -1,9 +1,10 @@
 const Patient = require('../models/patientModel');
+const ErrorCodes = require('../utils/ErrorCodes');
 
 async function getAll(req, res) {
     try {
         let patients = await Patient.find({});
-        res.json(patients);
+        res.status(ErrorCodes.OK).json(patients);
     } catch (err) {
         throw new Error(err);
     }
@@ -15,7 +16,7 @@ async function create(req, res) {
         console.log(patientInput);
         let patient = new Patient(patientInput);
         let savedPatient = await patient.save();
-        res.status(201).json(savedPatient);
+        res.status(ErrorCodes.CREATED).json(savedPatient);
     } catch (err) {
         throw new Error(err);
     }
