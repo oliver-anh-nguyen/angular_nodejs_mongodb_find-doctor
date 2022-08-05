@@ -1,11 +1,22 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
+// Connect to DB
+const DBURL = process.env.DBURL || 'mongodb://localhost:27017/finddoctor';
+mongoose.connect(DBURL, (err) => {
+    if (err) {
+        console.log('Mongoose: failed to connect to db', err);
+    } else {
+        console.log('Mongoose: connected to DB');
+    }
+});
+
+// Create app
 const PORT = process.env.PORT || 3000;
 const app = express();
-
 app.use(express.json());
 app.use(cors());
 app.use(morgan('combined'));
@@ -14,6 +25,7 @@ app.use('/', (req, res, next) => {
     res.json('Hello world');
 });
 
+// Error handling
 app.use((err, req, res, next) => {
     console.log(err);
     res.status(500).json({ error: err });
