@@ -6,8 +6,12 @@ const PatientSchema = new mongoose.Schema({
     phone: String,
     avatarUrl: String,
     appointment: [{
-        doctor: String,
-        specialty: String,
+        doctor: {
+            username: String,
+            fullname: String,
+            avatarUrl: String,
+            specialty: String
+        },
         location: {
             street: String,
             city: String,
@@ -15,7 +19,7 @@ const PatientSchema = new mongoose.Schema({
             zipcode: String
         },
         time: Date,
-        status: { type: String, default: 'BOOKED'}
+        status: { type: String, default: 'BOOKING'} // BOOKING, CONFIRMED, CANCELLED, COMPLETED, MISSED
     }]
 });
 
