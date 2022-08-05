@@ -4,6 +4,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const PORT = process.env.PORT || 3000;
+const patientRouter = require('./routers/patientRouter');
+
 // Connect to DB
 const DBURL = process.env.DBURL || 'mongodb://localhost:27017/finddoctor';
 mongoose.connect(DBURL, (err) => {
@@ -15,11 +18,13 @@ mongoose.connect(DBURL, (err) => {
 });
 
 // Create app
-const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan('combined'));
+
+// Routers
+app.use('/patients', patientRouter);
 
 app.use('/', (req, res, next) => {
     res.json('Hello world');
