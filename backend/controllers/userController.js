@@ -6,7 +6,7 @@ const patientModel = require("../models/patientModel");
 
 const SECRET = process.env.SECRET;
 
-async function login(req, res) {
+async function login(req, res, next) {
     try {
         const {username, password} = req.body;
         const userDb = await userModel.findOne({ username });
@@ -30,7 +30,7 @@ async function login(req, res) {
     }
 }
 
-async function signup(req, res) {
+async function signup(req, res, next) {
     try {
         // create new user
         let userInput = req.body;

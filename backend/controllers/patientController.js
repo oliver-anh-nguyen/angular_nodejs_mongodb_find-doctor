@@ -3,7 +3,7 @@ const doctorModel = require('../models/doctorModel');
 const userModel = require('../models/userModel');
 const StatusCodes = require('../utils/StatusCodes');
 
-async function getPatientById(req, res) {
+async function getPatientById(req, res, next) {
     try {
         const {username} = req.params;
         let patient = await patientModel.find({'username': username});
@@ -13,7 +13,7 @@ async function getPatientById(req, res) {
     }
 };
 
-async function bookAppointment(req, res) {
+async function bookAppointment(req, res, next) {
     try {
         const {username} = req.params;
         const {doctorUsername, time} = req.body;
@@ -73,7 +73,7 @@ async function bookAppointment(req, res) {
     }
 }
 
-async function cancelAppointment(req, res) {
+async function cancelAppointment(req, res, next) {
     try {
         const {username} = req.params;
         const {doctorUsername, time} = req.body;
@@ -97,7 +97,7 @@ async function cancelAppointment(req, res) {
     }
 }
 
-async function updateInfoPatient(req, res) {
+async function updateInfoPatient(req, res, next) {
     try {
         const {username} = req.params;
         const {fullname, avatarurl, phone } = req.body;
@@ -122,7 +122,7 @@ async function updateInfoPatient(req, res) {
     }
 }
 
-async function getAppointments(req, res) {
+async function getAppointments(req, res, next) {
     try {
         const {username} = req.params;
         let appointments = await patientModel.findOne({username}, {appointment: 1});

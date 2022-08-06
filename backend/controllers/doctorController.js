@@ -4,7 +4,7 @@ const Patient = require('../models/patientModel');
 const StatusCodes = require('../utils/StatusCodes');
 const checking = require('../utils/checking');
 
-async function getAll(req, res) {
+async function getAll(req, res, next) {
     try {
         let doctors = await Doctor.find({}, { '_id': 0, '__v': 0 });
         res.json(doctors);
@@ -13,7 +13,7 @@ async function getAll(req, res) {
     }
 };
 
-async function search(req, res) {
+async function search(req, res, next) {
     try {
         let specialty = req.query.specialty;
         let city = req.query.city;
@@ -35,7 +35,7 @@ async function search(req, res) {
     }
 };
 
-async function getByUsername(req, res) {
+async function getByUsername(req, res, next) {
     try {
         let username = req.params.username;
         let doctor = await Doctor.findOne({ 'username': username }, { '_id': 0, '__v': 0 });
@@ -45,7 +45,7 @@ async function getByUsername(req, res) {
     }
 };
 
-async function update(req, res) {
+async function update(req, res, next) {
     try {
         let username = req.params.username;
         let body = req.body;
