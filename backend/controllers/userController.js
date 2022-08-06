@@ -12,7 +12,13 @@ async function login(req, res) {
             throw new Error(`LOGIN: username ${username} does not exist!`);
         }
         if (userDb.password === password) {
-            const token = jwt.sign( {...userDb}, `SECRET`);
+            let infoUser = {username: userDb.username,
+                            role: userDb.role,
+                            fullname: userDb.fullname,
+                            avatarurl: userDb.avatarurl
+            };
+            console.log(infoUser);
+            const token = jwt.sign( infoUser, `SECRET`);
             res.status(StatusCodes.OK).json({token});
         } else {
             throw new Error(`LOGIN: password incorrect!`);
