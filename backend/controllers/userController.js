@@ -4,6 +4,8 @@ const userModel = require('../models/userModel');
 const doctorModel = require("../models/doctorModel");
 const patientModel = require("../models/patientModel");
 
+const SECRET = process.env.SECRET;
+
 async function login(req, res) {
     try {
         const {username, password} = req.body;
@@ -18,7 +20,7 @@ async function login(req, res) {
                             avatarurl: userDb.avatarurl
             };
             console.log(infoUser);
-            const token = jwt.sign( infoUser, `SECRET`);
+            const token = jwt.sign( infoUser, SECRET);
             res.status(StatusCodes.OK).json({token});
         } else {
             next(`LOGIN: password incorrect!`);

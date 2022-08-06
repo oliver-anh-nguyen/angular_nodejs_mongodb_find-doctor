@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const StatusCodes = require('../utils/StatusCodes');
 
+const SECRET = process.env.SECRET;
+
 module.exports = function checkToken(req, res, next) {
     try {
         if (!req.headers['authorization']) {
@@ -12,7 +14,7 @@ module.exports = function checkToken(req, res, next) {
             return res.status(StatusCodes.UNAUTHORIZED).json({ auth: false, message: 'No token provided!' });
         }
 
-        jwt.verify(token, `SECRET`, function (err, decoded) {
+        jwt.verify(token, SECRET, function (err, decoded) {
             if (err) {
                 return res.status(StatusCodes.INTERNAL_ERROR).json({ auth: false, message: 'Failed to authenticate token!' })
             }
