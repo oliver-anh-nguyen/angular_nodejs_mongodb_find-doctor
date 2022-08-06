@@ -2,11 +2,35 @@
 @port = 3000
 @host = {{hostname}}:{{port}}
 @contentType = application/json
+### use Login api to get token, then copy token after Bearer (with space)
+@token = Bearer TOKEN_HERE
+
+################ USER #####################
+### Sign up user
+POST http://{{host}}/users HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "username": "dt1",
+    "password": "123"
+}
+
+### Login
+POST http://{{host}}/users/login HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "username": "dt1",
+    "password": "123"
+}
+
+
 
 ################ PATIENT #####################
 ### Create
 POST http://{{host}}/patients HTTP/1.1
 Content-Type: {{contentType}}
+authorization: {{token}}
 
 {
     "username": "p1",
@@ -18,11 +42,13 @@ Content-Type: {{contentType}}
 ### Get all
 GET http://{{host}}/patients HTTP/1.1
 Content-Type: {{contentType}}
+authorization: {{token}}
 
 ################ DOCTOR #####################
 ### Get all
 GET http://{{host}}/doctors HTTP/1.1
 Content-Type: {{contentType}}
+authorization: {{token}}
 
 ### Get by username
 GET http://{{host}}/doctors/dt1 HTTP/1.1
@@ -31,10 +57,12 @@ Content-Type: {{contentType}}
 ### Search by specialty
 GET http://{{host}}/doctors/search?specialty=eye HTTP/1.1
 Content-Type: {{contentType}}
+authorization: {{token}}
 
 ### Update profile
 PATCH http://{{host}}/doctors/dt1 HTTP/1.1
 Content-Type: {{contentType}}
+authorization: {{token}}
 
 {
     "fullname": "Steve Doctor",
