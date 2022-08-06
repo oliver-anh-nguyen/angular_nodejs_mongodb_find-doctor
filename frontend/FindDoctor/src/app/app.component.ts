@@ -1,10 +1,47 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
+import {Router} from "@angular/router";
+import {UserService} from "./login/user.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'FindDoctor';
+export class AppComponent implements OnDestroy {
+  isLoggedIn: boolean = false;
+  sub!: Subscription;
+  username: string = '';
+  constructor(private userService: UserService, private router: Router) {
+    this.sub = this.userService.userState$.subscribe(userState => {
+      if (userState.token) {
+        this.isLoggedIn = true
+        this.username = this.userService.getUserState()?.fullname as string;
+      } else {
+        this.isLoggedIn = false;
+      }
+    })
+
+    this.userService.refreshState();
+
+    const userState = this.userService.getUserState();
+    if (userState?.username) {
+      if (userState?.role === 'PATIENT') {
+        this.router.navigate(['/', 'patient']);
+      } else {
+        this.router.navigate(['/', 'doctor']);
+      }
+    } else {
+      this.router.navigate(['/', 'login']);
+    }
+  }
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/', 'login']);
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }
