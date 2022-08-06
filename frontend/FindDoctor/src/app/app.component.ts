@@ -12,11 +12,19 @@ export class AppComponent implements OnDestroy {
   isLoggedIn: boolean = false;
   sub!: Subscription;
   username: string = '';
+  DEFAULT_AVATAR_URL = '../assets/images/person-black-icon.png';
+  avatarUrl = '';
   constructor(private userService: UserService, private router: Router) {
     this.sub = this.userService.userState$.subscribe(userState => {
+      console.log(userState)
       if (userState.token) {
         this.isLoggedIn = true
         this.username = this.userService.getUserState()?.fullname as string;
+        this.avatarUrl = this.userService.getUserState()?.avatarurl as string;
+        console.log(this.avatarUrl);  
+        if (!this.avatarUrl || this.avatarUrl.trim().length === 0) {
+          this.avatarUrl = this.DEFAULT_AVATAR_URL;
+        }
       } else {
         this.isLoggedIn = false;
       }

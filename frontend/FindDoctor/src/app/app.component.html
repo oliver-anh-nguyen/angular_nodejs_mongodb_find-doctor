@@ -1,6 +1,10 @@
 <mat-toolbar color="primary">
   <span>Doctor Search</span>
-  <button mat-raised-button (click)="logout()" *ngIf="isLoggedIn">Logout</button>
-  <p *ngIf="isLoggedIn">welcome {{username}}</p>
+  <span class="between-spacer"></span>
+  <p class="welcome-text" *ngIf="isLoggedIn">Welcome {{username}}</p>
+  <button mat-icon-button color="image" (click)="logout()" *ngIf="isLoggedIn" >
+    <img class="profile-image clip-circle" [src]="avatarUrl" alt="Person" />
+  </button>
+  
 </mat-toolbar>
 <router-outlet></router-outlet>
