@@ -1,10 +1,12 @@
 const patientModel = require('../models/patientModel');
 const doctorModel = require('../models/doctorModel');
+const userModel = require('../models/userModel');
 const StatusCodes = require('../utils/StatusCodes');
 
 async function getPatientById(req, res) {
     try {
-        let patient = await patientModel.find({'username': req.params.username});
+        const {username} = req.params;
+        let patient = await patientModel.find({'username': username});
         res.status(StatusCodes.OK).json(patient);
     } catch (err) {
         throw new Error(err);
@@ -95,8 +97,45 @@ async function cancelAppointment(req, res) {
     }
 }
 
+async function updateInfoPatient(req, res) {
+    try {
+        const {username} = req.params;
+        const {fullname, avatarurl, phone } = req.body;
+
+        // update info patient
+        await patientModel.updateOne({
+            'username': username
+        }, {
+            $set: {'fullname': fullname, 'avatarurl': avatarurl, 'phone': phone}
+        })
+
+        // update info user
+        await userModel.updateOne({
+            'username': username
+        }, {
+            $set: {'fullname': fullname, 'avatarurl': avatarurl}
+        })
+
+        res.status(StatusCodes.OK).json(`PATIENT: update profile successfully!`);
+    } catch (err) {
+        throw new Error(err);
+    }
+}
+
+async function getAppointments(req, res) {
+    try {
+        const {username} = req.params;
+        let appointments = await patientModel.findOne({username}, {appointment: 1});
+        res.status(StatusCodes.OK).json(appointments);
+    } catch (err) {
+        throw new Error(err);
+    }
+}
+
 module.exports = {
     getPatientById,
     bookAppointment,
-    cancelAppointment
+    cancelAppointment,
+    updateInfoPatient,
+    getAppointments
 }
