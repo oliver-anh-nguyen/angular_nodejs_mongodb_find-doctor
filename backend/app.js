@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const checkToken = require('./middlewares/checkToken')
 const PORT = process.env.PORT || 3000;
 const patientRouter = require('./routers/patientRouter');
 const userRouter = require('./routers/userRouter');
@@ -26,7 +27,7 @@ app.use(cors());
 app.use(morgan('combined'));
 
 // Routers
-app.use('/patients', patientRouter);
+app.use('/patients', checkToken, patientRouter);
 app.use('/users', userRouter);
 
 // Error handling
