@@ -8,6 +8,7 @@ const checkToken = require('./middlewares/checkToken')
 const PORT = process.env.PORT || 3000;
 const patientRouter = require('./routers/patientRouter');
 const userRouter = require('./routers/userRouter');
+const doctorRouter = require('./routers/doctorRouter');
 const StatusCodes = require('./utils/StatusCodes');
 
 // Connect to DB
@@ -29,6 +30,7 @@ app.use(morgan('combined'));
 // Routers
 app.use('/patients', checkToken, patientRouter);
 app.use('/users', userRouter);
+app.use('/doctors', checkToken, doctorRouter);
 
 // Error handling
 app.use((err, req, res, next) => {
