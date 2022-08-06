@@ -116,6 +116,13 @@ async function updateInfoPatient(req, res, next) {
             $set: {'fullname': fullname, 'avatarurl': avatarurl}
         })
 
+        // update info user in appointments
+        await doctorModel.updateMany({ 'appointment.patient.username': username},
+            {'appointment.$.patient.fullname': fullname,
+                'appointment.$.patient.phone': phone,
+                'appointment.$.patient.avatarurl': avatarurl}
+        );
+
         res.status(StatusCodes.OK).json(`PATIENT: update profile successfully!`);
     } catch (err) {
         next(err);
