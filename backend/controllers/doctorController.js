@@ -75,7 +75,7 @@ async function update(req, res, next) {
             updateAppointmentNeeded = true;
             updateUser['fullname'] = fullname;
             updateDoctor['fullname'] = fullname;
-            updateAppointment['appointment.$.doctor.fullname'] = fullname;
+            updateAppointment['appointment.$[elm].doctor.fullname'] = fullname;
         }
         if (phone) {
             updateNeeded = true;
@@ -95,7 +95,7 @@ async function update(req, res, next) {
             updateAppointmentNeeded = true;
             updateUser['specialty'] = specialty;
             updateDoctor['specialty'] = specialty;
-            updateAppointment['appointment.$.doctor.specialty'] = specialty;
+            updateAppointment['appointment.$[elm].doctor.specialty'] = specialty;
         }
         if (description) {
             updateNeeded = true;
@@ -111,7 +111,7 @@ async function update(req, res, next) {
             }
             updateAppointmentNeeded = true;
             updateDoctor['location'] = location;
-            updateAppointment['appointment.$.location'] = location;
+            updateAppointment['appointment.$[elm].location'] = location;
         }
         if (!updateNeeded) {
             return res.status(StatusCodes.BAD_REQUEST({ "error": "No data provided for update" }));
@@ -123,7 +123,8 @@ async function update(req, res, next) {
             updatedDoctor = await Doctor.findOneAndUpdate({ username: username }, updateDoctor);
         }
         if (updateAppointmentNeeded) {
-            await Patient.updateMany({ 'appointment.doctor.username': username }, updateAppointment);
+            const filters = { 'arrayFilters': [{ 'elm.doctor.username': username }], 'multi': true }
+            await Patient.updateMany({ 'appointment.doctor.username': username }, updateAppointment, filters);
         }
 
         res.json(updatedDoctor);

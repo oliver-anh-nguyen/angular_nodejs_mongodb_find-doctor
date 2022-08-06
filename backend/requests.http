@@ -20,7 +20,7 @@ POST http://{{host}}/users/login HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-    "username": "dt1",
+    "username": "pa2",
     "password": "123"
 }
 
@@ -39,10 +39,20 @@ authorization: {{token}}
     "avatarUrl": "http://s3.amazon.com/finddoctor/patient/p1.png"
 }
 
-### Get all
-GET http://{{host}}/patients HTTP/1.1
+### Get a patient
+GET http://{{host}}/patients/pa2 HTTP/1.1
 Content-Type: {{contentType}}
 authorization: {{token}}
+
+### Book a appointment
+POST http://{{host}}/patients/pa2/appointment HTTP/1.1
+Content-Type: {{contentType}}
+authorization: {{token}}
+
+{
+    "doctorUsername": "dt1",
+    "time": "2023-01-30T08:00"
+}
 
 ################ DOCTOR #####################
 ### Get all
@@ -53,6 +63,7 @@ authorization: {{token}}
 ### Get by username
 GET http://{{host}}/doctors/dt1 HTTP/1.1
 Content-Type: {{contentType}}
+authorization: {{token}}
 
 ### Search by specialty
 GET http://{{host}}/doctors/search?specialty=eye HTTP/1.1
@@ -65,9 +76,18 @@ Content-Type: {{contentType}}
 authorization: {{token}}
 
 {
+    "fullname": "Steve Good"
+}
+
+### Update profile
+PATCH http://{{host}}/doctors/dt1 HTTP/1.1
+Content-Type: {{contentType}}
+authorization: {{token}}
+
+{
     "fullname": "Steve Doctor",
     "location": {
-        "street": "10 Main street",
+        "street": "1 Main street",
         "city": "fairfield",
         "state": "Iowa",
         "zipcode": "52556"
