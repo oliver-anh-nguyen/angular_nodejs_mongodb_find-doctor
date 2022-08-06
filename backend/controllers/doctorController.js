@@ -15,8 +15,7 @@ async function getAll(req, res, next) {
 
 async function search(req, res, next) {
     try {
-        let specialty = req.query.specialty;
-        let city = req.query.city;
+        let { specialty, city } = req.query;
         let query = {};
         if (!specialty && !city) {
             res.status(StatusCodes.BAD_REQUEST).json({ "error": "There is no specialty or city in the request" });
@@ -37,7 +36,7 @@ async function search(req, res, next) {
 
 async function getByUsername(req, res, next) {
     try {
-        let username = req.params.username;
+        let { username } = req.params;
         let doctor = await Doctor.findOne({ 'username': username }, { '_id': 0, '__v': 0 });
         res.json(doctor);
     } catch (err) {
@@ -48,14 +47,7 @@ async function getByUsername(req, res, next) {
 async function update(req, res, next) {
     try {
         let username = req.params.username;
-        let body = req.body;
-        let fullname = body.fullname;
-        let phone = body.phone;
-        let avatarurl = body.avatarurl;
-        let specialty = body.specialty;
-        let description = body.description;
-        let degrees = body.degrees;
-        let location = body.location;
+        let { fullname, phone, avatarurl, specialty, description, degrees, location } = req.body;
 
         let updateNeeded = false;
         let updateUserNeeded = false;
@@ -133,9 +125,43 @@ async function update(req, res, next) {
     }
 };
 
+async function getAllAppointments(req, res, next) {
+    try {
+        const { username } = req.params;
+        let doctor = await Doctor.findOne({ 'username': username });
+        if (doctor) {
+            res.json(doctor.appointment);
+        } else {
+            res.json([]);
+        }
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function updateAppointment(req, res, next) {
+    const supportedStatus = ['BOOKING', 'CONFIRMED', 'CANCELLED', 'COMPLETED', 'MISSED']
+    try {
+        const { username, patientUsername, time } = req.params;
+        const { status } = req.body;
+        if (!status || supportedStatus.findIndex(s => s == status) < 0) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ 'error': 'invalid status' });
+        }
+        await Doctor.updateOne({ 'username': username }, { 'appointment.$[ap].status': status },
+            { arrayFilters: [{ 'ap.patient.username': patientUsername, 'ap.time': time }] });
+        await Patient.updateOne({ 'username': patientUsername }, { 'appointment.$[ap].status': status },
+            { arrayFilters: [{ 'ap.doctor.username': username, 'ap.time': time }] });
+        res.json({ "message": "OK" });
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
     getAll,
     getByUsername,
     search,
-    update
+    update,
+    getAllAppointments,
+    updateAppointment,
 }
