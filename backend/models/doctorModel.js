@@ -4,7 +4,7 @@ const DoctorSchema = new mongoose.Schema({
     username: String,
     fullname: String,
     phone: String,
-    avatarUrl: String,
+    avatarurl: String,
     specialty: String,
     description: String,
     degrees: Array,
@@ -19,7 +19,7 @@ const DoctorSchema = new mongoose.Schema({
             username: String,
             fullname: String,
             phone: String,
-            avatarUrl: String
+            avatarurl: String
         },
         time: Date,
         status: { type: String, default: 'BOOKING' } // BOOKING, CONFIRMED, CANCELLED, COMPLETED, MISSED

@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
     username: String,
     password: String,
-    role: { type: String, default: 'PATIENT' }, // Doctor, Patient, Admin
+    role: { type: String, default: 'PATIENT' }, // DOCTOR, PATIENT, ADMIN
     fullname: String,
-    avatarUrl: String // Aws S3 url
+    avatarurl: String // AWS S3 URL
 });
 
 module.exports = mongoose.model('User', UserSchema);

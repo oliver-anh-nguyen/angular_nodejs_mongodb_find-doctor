@@ -6,7 +6,8 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
 const patientRouter = require('./routers/patientRouter');
-const ErrorCodes = require('./utils/ErrorCodes');
+const userRouter = require('./routers/userRouter');
+const StatusCodes = require('./utils/StatusCodes');
 
 // Connect to DB
 const DBURL = process.env.DBURL || 'mongodb://localhost:27017/finddoctor';
@@ -26,15 +27,12 @@ app.use(morgan('combined'));
 
 // Routers
 app.use('/patients', patientRouter);
-
-app.use('/', (req, res, next) => {
-    res.json('Hello world');
-});
+app.use('/users', userRouter);
 
 // Error handling
 app.use((err, req, res, next) => {
     console.log(err);
-    res.status(ErrorCodes.INTERNAL_ERROR).json({ error: err });
+    res.status(StatusCodes.INTERNAL_ERROR).json({ error: err });
 });
 
 app.listen(PORT, () => {

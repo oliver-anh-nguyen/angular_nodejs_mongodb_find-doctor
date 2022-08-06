@@ -4,12 +4,12 @@ const PatientSchema = new mongoose.Schema({
     username: String,
     fullname: String,
     phone: String,
-    avatarUrl: String,
+    avatarurl: String,
     appointment: [{
         doctor: {
             username: String,
             fullname: String,
-            avatarUrl: String,
+            avatarurl: String,
             specialty: String
         },
         location: {
