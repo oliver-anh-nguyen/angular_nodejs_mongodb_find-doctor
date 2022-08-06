@@ -18,3 +18,61 @@ Content-Type: {{contentType}}
 ### Get all
 GET http://{{host}}/patients HTTP/1.1
 Content-Type: {{contentType}}
+
+################ DOCTOR #####################
+### Get all
+GET http://{{host}}/doctors HTTP/1.1
+Content-Type: {{contentType}}
+
+### Get by username
+GET http://{{host}}/doctors/dt1 HTTP/1.1
+Content-Type: {{contentType}}
+
+### Search by specialty
+GET http://{{host}}/doctors/search?specialty=eye HTTP/1.1
+Content-Type: {{contentType}}
+
+### Update profile
+PATCH http://{{host}}/doctors/dt1 HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "fullname": "Steve Doctor",
+    "location": {
+        "street": "10 Main street",
+        "city": "fairfield",
+        "state": "Iowa",
+        "zipcode": "52556"
+    }
+}
+
+################ SPECIALTY #####################
+### Get all
+GET http://{{host}}/specialties HTTP/1.1
+Content-Type: {{contentType}}
+
+### Get by id
+GET http://{{host}}/specialties/62ee94a90130159cdfb21206 HTTP/1.1
+Content-Type: {{contentType}}
+
+### Create
+POST http://{{host}}/specialties HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "name": "Dentist",
+    "description": "Dentist doctors"
+}
+
+### Update
+PATCH http://{{host}}/specialties/62ee94a90130159cdfb21206 HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "name": "Dentist",
+    "description": "Dentist"
+}
+
+### Delete by id
+DELETE http://{{host}}/specialties/62ee8cf4224bcb9d7b9c306e HTTP/1.1
+Content-Type: {{contentType}}
