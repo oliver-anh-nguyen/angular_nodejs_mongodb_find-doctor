@@ -27,7 +27,7 @@ async function signup(req, res) {
         // create new user
         let userInput = req.body;
         let user = new userModel(userInput);
-        await user.save();
+        let newUser = await user.save();
 
         if (req.body.role === 'PATIENT') {
             // create new patient
@@ -35,15 +35,15 @@ async function signup(req, res) {
             let patient = new patientModel(patientInput);
             let newPatient = await patient.save();
             res.status(StatusCodes.CREATED).json(newPatient);
-        }
-        if (req.body.role === 'DOCTOR') {
+        } else if (req.body.role === 'DOCTOR') {
             // create new doctor
             let doctorInput = {username: req.body.username, fullname: req.body.fullname, avatarurl: req.body.avatarurl};
             let doctor = new doctorModel(doctorInput);
             let newDoctor = await doctor.save();
             res.status(StatusCodes.CREATED).json(newDoctor);
+        } else {
+            res.status(StatusCodes.CREATED).json(newUser);
         }
-
     } catch (err) {
         throw new Error(`SIGNUP: ${err}`);
     }
