@@ -9,7 +9,7 @@ async function getPatientById(req, res) {
         let patient = await patientModel.find({'username': username});
         res.status(StatusCodes.OK).json(patient);
     } catch (err) {
-        throw new Error(err);
+        next(err);
     }
 };
 
@@ -69,7 +69,7 @@ async function bookAppointment(req, res) {
         });
         res.status(StatusCodes.OK).json(`PATIENT: add appointment successfully!`);
     } catch (err) {
-        throw new Error(err);
+        next(err);
     }
 }
 
@@ -93,7 +93,7 @@ async function cancelAppointment(req, res) {
         });
         res.status(StatusCodes.OK).json(`PATIENT: cancel appointment successfully!`);
     } catch (err) {
-        throw new Error(err);
+        next(err);
     }
 }
 
@@ -118,7 +118,7 @@ async function updateInfoPatient(req, res) {
 
         res.status(StatusCodes.OK).json(`PATIENT: update profile successfully!`);
     } catch (err) {
-        throw new Error(err);
+        next(err);
     }
 }
 
@@ -128,7 +128,7 @@ async function getAppointments(req, res) {
         let appointments = await patientModel.findOne({username}, {appointment: 1});
         res.status(StatusCodes.OK).json(appointments);
     } catch (err) {
-        throw new Error(err);
+        next(err);
     }
 }
 

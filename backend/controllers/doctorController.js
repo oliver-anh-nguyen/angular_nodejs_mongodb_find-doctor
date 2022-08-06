@@ -9,7 +9,7 @@ async function getAll(req, res) {
         let doctors = await Doctor.find({}, { '_id': 0, '__v': 0 });
         res.json(doctors);
     } catch (err) {
-        throw new Error(err);
+        next(err);
     }
 };
 
@@ -31,7 +31,7 @@ async function search(req, res) {
         let doctors = await Doctor.find(query, { '_id': 0, '__v': 0 });
         res.json(doctors);
     } catch (err) {
-        throw new Error(err);
+        next(err);
     }
 };
 
@@ -41,7 +41,7 @@ async function getByUsername(req, res) {
         let doctor = await Doctor.findOne({ 'username': username }, { '_id': 0, '__v': 0 });
         res.json(doctor);
     } catch (err) {
-        throw new Error(err);
+        next(err);
     }
 };
 
@@ -128,7 +128,7 @@ async function update(req, res) {
 
         res.json(updatedDoctor);
     } catch (err) {
-        throw new Error(err);
+        next(err);
     }
 };
 

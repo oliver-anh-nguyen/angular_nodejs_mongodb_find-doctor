@@ -9,7 +9,7 @@ async function login(req, res) {
         const {username, password} = req.body;
         const userDb = await userModel.findOne({ username });
         if (!userDb) {
-            throw new Error(`LOGIN: username ${username} does not exist!`);
+            next(`LOGIN: username ${username} does not exist!`);
         }
         if (userDb.password === password) {
             let infoUser = {username: userDb.username,
@@ -21,10 +21,10 @@ async function login(req, res) {
             const token = jwt.sign( infoUser, `SECRET`);
             res.status(StatusCodes.OK).json({token});
         } else {
-            throw new Error(`LOGIN: password incorrect!`);
+            next(`LOGIN: password incorrect!`);
         }
     } catch (err) {
-        throw new Error(`LOGIN: ${err}`);
+        next(`LOGIN: ${err}`);
     }
 }
 
@@ -51,7 +51,7 @@ async function signup(req, res) {
             res.status(StatusCodes.CREATED).json(newUser);
         }
     } catch (err) {
-        throw new Error(`SIGNUP: ${err}`);
+        next(`SIGNUP: ${err}`);
     }
 }
 
