@@ -3,7 +3,8 @@ export interface AppointmentPatient {
     username: string,
     fullname: string
     avatarurl: string,
-    specialty: string
+    specialty: string,
+    phone: string
   },
   location: {
     city: string,

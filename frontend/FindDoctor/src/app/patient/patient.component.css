@@ -1,4 +1,14 @@
-.example-header-image {
+h1 {
+  margin: 20px;
+  font-weight: initial;
+}
+.body-card {
+  /*margin: 20px;*/
+  width: 70%;
+  /*border: 1px solid gainsboro;*/
+}
+
+.header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
@@ -22,4 +32,49 @@ mat-grid-list {
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.status {
+  font-weight: bold;
+  margin-right: 10px;
+  float:right
+}
+
+.line-bottom {
+  padding-top: 25px;
+}
+
+.bookingClass {
+  color: navy;
+}
+
+.cancelClass {
+  color: red;
+}
+
+.missClass {
+  color: red;
+}
+
+.completeClass {
+  color: chocolate;
+}
+
+.confirmClass {
+  color: green;
+}
+
+.location {
+  font-weight: lighter;
+  font-size: small;
+  color: grey;
+}
+
+.phone {
+  font-weight: lighter;
+  font-size: small;
+}
+
+.mat-card-subtitle {
+  color: darkblue;
 }

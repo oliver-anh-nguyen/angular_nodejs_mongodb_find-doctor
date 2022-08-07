@@ -8,6 +8,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatButtonModule,
     MatGridListModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ]
 })
 export class PatientModule { }
