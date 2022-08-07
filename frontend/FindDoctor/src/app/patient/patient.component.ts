@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {PatientService} from "./patient.service";
+import {UserService} from "../login/user.service";
+import {AppointmentPatient} from "./AppointmentPatient";
 
 @Component({
   selector: 'app-patient',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientComponent implements OnInit {
 
-  public appointments:string[] = ['District', 'District', 'District', 'District', 'District'];
+  public appointments:Array<AppointmentPatient>= [];
 
-  constructor() { }
+  constructor(private patientService: PatientService, private userService: UserService) {
+    let username = userService.getUserState()?.username;
+    if (username) {
+      this.patientService.getAppointments(username)
+        .subscribe(data => {
+          console.log(data);
+          this.appointments = data;
+        })
+    }
+  }
 
   ngOnInit(): void {
   }

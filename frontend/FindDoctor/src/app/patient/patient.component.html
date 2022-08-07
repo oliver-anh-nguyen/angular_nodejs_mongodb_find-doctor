@@ -4,19 +4,18 @@
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Dortor Strange</mat-card-title>
-        <mat-card-subtitle>(641) 819-1234</mat-card-subtitle>
+        <mat-card-title>{{item.doctor.fullname}}</mat-card-title>
+        <mat-card-subtitle>Specialty: {{item.doctor.specialty}}</mat-card-subtitle>
         <span class="example-spacer"></span>
         <button mat-icon-button>
           <mat-icon class="example-icon" color="warn">more_vert</mat-icon>
         </button>
       </mat-card-header>
       <mat-chip-list>
-        <mat-chip color="primary" selected>Location: 414 N B St, Fairfield, Iowa</mat-chip>
-        <mat-chip color="primary" selected>Specialty: Eye</mat-chip>
-        <mat-chip color="primary" selected>Booking</mat-chip>
-        <mat-chip color="accent" selected>06:00 PM</mat-chip>
-        <mat-chip color="accent" selected>2 August 2022</mat-chip>
+        <mat-chip color="primary" selected>{{item.location.street}}, {{item.location.city}}, {{item.location.state}}, {{item.location.zipcode}}</mat-chip>
+        <mat-chip color="primary" selected>{{item.status}}</mat-chip>
+        <mat-chip color="accent" selected>{{item.time | date:'shortTime'}}</mat-chip>
+        <mat-chip color="accent" selected>{{item.time| date:'mediumDate'}}</mat-chip>
       </mat-chip-list>
     </mat-card>
   </mat-grid-tile>

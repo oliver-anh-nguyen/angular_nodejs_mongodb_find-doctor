@@ -132,8 +132,12 @@ async function updateInfoPatient(req, res, next) {
 async function getAppointments(req, res, next) {
     try {
         const {username} = req.params;
-        let appointments = await patientModel.findOne({username}, {appointment: 1});
-        res.status(StatusCodes.OK).json(appointments);
+        let appointments = await patientModel.findOne({username});
+        if (appointments) {
+            res.status(StatusCodes.OK).json(appointments.appointment);
+        } else {
+            res.json([]);
+        }
     } catch (err) {
         next(err);
     }
