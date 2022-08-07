@@ -10,7 +10,8 @@ const PatientSchema = new mongoose.Schema({
             username: String,
             fullname: String,
             avatarurl: String,
-            specialty: String
+            specialty: String,
+            phone: String
         },
         location: {
             street: String,

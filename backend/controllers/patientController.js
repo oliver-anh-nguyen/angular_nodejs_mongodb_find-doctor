@@ -26,7 +26,8 @@ async function bookAppointment(req, res, next) {
                 username: doctor.username,
                 fullname: doctor.fullname,
                 avatarurl: doctor.avatarurl,
-                specialty: doctor.specialty
+                specialty: doctor.specialty,
+                phone: doctor.phone
             },
             time: time,
             status: 'BOOKING'
