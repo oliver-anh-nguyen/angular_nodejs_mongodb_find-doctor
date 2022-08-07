@@ -10,7 +10,8 @@
   <mat-grid-tile>
     <mat-card>
       <mat-card-header>
-        <div mat-card-avatar [ngStyle]="{'background-image': 'url('+item.doctor.avatarurl+')'}" class="header-image"></div>
+        <div mat-card-avatar *ngIf="item.doctor.avatarurl" [ngStyle]="{'background-image': 'url('+item.doctor.avatarurl+')'}" class="header-image"></div>
+        <div mat-card-avatar *ngIf="!item.doctor.avatarurl" class="header-image"></div>
         <mat-card-title>{{item.doctor.fullname}}</mat-card-title>
         <mat-card-subtitle>Specialty: {{item.doctor.specialty}}</mat-card-subtitle>
         <span class="spacer"></span>
@@ -26,8 +27,8 @@
           </mat-menu>
         </div>
       </mat-card-header>
-      <p class="phone">Phone: +1 ({{item.doctor.phone | slice:0:3}}) {{item.doctor.phone | slice:3:6}}-{{item.doctor.phone | slice:6:10}}</p>
-      <p class="location">Location: {{item.location.street}}, {{item.location.city}}, {{item.location.state}}, {{item.location.zipcode}}</p>
+      <p class="phone" *ngIf="item.doctor.phone">Phone: +1 ({{item.doctor.phone | slice:0:3}}) {{item.doctor.phone | slice:3:6}}-{{item.doctor.phone | slice:6:10}}</p>
+      <p class="location" *ngIf="item.location">Location: {{item.location.street}}, {{item.location.city}}, {{item.location.state}}, {{item.location.zipcode}}</p>
       <div class="line-bottom">
         <span style="font-weight: bold; font-size: 17px">{{item.time | date:'shortTime'}}</span>
         <span style="font-size: 13px; color:dimgrey">  {{item.time | date:'mediumDate'}}</span>
