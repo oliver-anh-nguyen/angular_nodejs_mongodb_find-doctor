@@ -1,4 +1,9 @@
 <h1>List Appointments</h1>
+<div class="no-appoint" *ngIf="appointments.length == 0">
+  <h2>You don't have an appointment! Booking now!</h2>
+  <button mat-flat-button color="primary" (click)="booking()">Booking</button>
+</div>
+
 <div class="body-card">
 <mat-grid-list cols="3" rowHeight="220px" [gutterSize]="'10px'">
   <ng-container *ngFor="let item of appointments">
@@ -8,13 +13,13 @@
         <div mat-card-avatar [ngStyle]="{'background-image': 'url('+item.doctor.avatarurl+')'}" class="header-image"></div>
         <mat-card-title>{{item.doctor.fullname}}</mat-card-title>
         <mat-card-subtitle>Specialty: {{item.doctor.specialty}}</mat-card-subtitle>
-        <span class="example-spacer"></span>
+        <span class="spacer"></span>
         <div *ngIf="item.status === 'BOOKING' || item.status === 'CONFIRMED'">
           <button mat-icon-button>
             <mat-icon [matMenuTriggerFor]="menu" color="primary">more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="deleteAppointment()">
               <mat-icon>delete</mat-icon>
               <span>Cancel</span>
             </button>

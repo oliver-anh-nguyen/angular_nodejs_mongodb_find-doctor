@@ -26,4 +26,12 @@ export class PatientComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  booking() {
+    console.log('go to booking view');
+  }
+
+  deleteAppointment() {
+    console.log('delete appointment');
+  }
+
 }

@@ -2,6 +2,10 @@ h1 {
   margin: 20px;
   font-weight: initial;
 }
+.no-appoint {
+  margin: 20px;
+  font-weight: initial;
+}
 .body-card {
   /*margin: 20px;*/
   width: 70%;
@@ -26,11 +30,7 @@ mat-grid-list {
   width: 100px;
 }
 
-.example-icon {
-  padding: 0 14px;
-}
-
-.example-spacer {
+.spacer {
   flex: 1 1 auto;
 }
 
