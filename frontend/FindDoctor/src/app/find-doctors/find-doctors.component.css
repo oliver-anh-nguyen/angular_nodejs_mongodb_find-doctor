@@ -1,0 +1,82 @@
+.search-segment {
+  background-color: rgb(224, 243, 250);
+  width: 100%;
+  height: 300px;
+  /* margin-top: 0; */
+}
+
+.container {
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-top: 100px;
+}
+
+.header {
+  color: rgb(40, 57, 133);
+  font-size: 60px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.doctor-list {
+  background-color: gainsboro;
+}
+
+.doctor-detail {
+  background-color: blanchedalmond;
+  min-width: 400;
+}
+
+.profile-image {
+  width: 60px;
+  height: 60px;
+}
+
+.clip-circle {
+  clip-path: circle(30px at center);
+}
+
+mat-card {
+  min-width: 200px;
+  margin-bottom: 20px;
+}
+
+mat-toolbar {
+  justify-content: space-between;
+}
+
+mat-card-actions {
+  justify-content: space-between;
+}
+
+.detail-top-content {
+  display: flex;
+  background-color: aliceblue;
+  justify-content: space-between;
+}
+
+.detail-image {
+  width: 160px;
+  height: 160px;
+  clip-path: circle(80px at center);
+  margin: 20px;
+}
+
+.top-left-content {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+}    
+
+.detail-main-content {
+    margin: 20px;
+}
+
+.degrees-title, .description-title, .location-title {
+    font-weight: bold;
+}

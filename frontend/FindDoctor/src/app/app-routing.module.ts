@@ -5,7 +5,7 @@ import {LoginComponent} from "./login/login.component";
 import {CheckTokenGuard} from "./check-token.guard";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full'},
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'patient',
@@ -17,7 +17,12 @@ const routes: Routes = [
     loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule),
     canActivate: [CheckTokenGuard]
   },
-  { path: '**', redirectTo: 'login'}
+  {
+    path: 'find-doctors',
+    loadChildren: () => import('./find-doctors/find-doctors.module').then(m => m.FindDoctorsModule),
+    canActivate: [CheckTokenGuard]
+  },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

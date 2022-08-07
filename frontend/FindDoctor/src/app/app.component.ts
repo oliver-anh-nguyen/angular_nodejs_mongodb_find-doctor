@@ -35,7 +35,7 @@ export class AppComponent implements OnDestroy {
     const userState = this.userService.getUserState();
     if (userState?.username) {
       if (userState?.role === 'PATIENT') {
-        this.router.navigate(['/', 'patient']);
+        this.router.navigate(['/', 'find-doctors']);
       } else {
         this.router.navigate(['/', 'doctor']);
       }

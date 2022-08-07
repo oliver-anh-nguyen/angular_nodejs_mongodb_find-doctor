@@ -1,0 +1,114 @@
+<div class="search-segment">
+    <div class="container">
+        <h1 class="header">Find doctors easily</h1>
+        <br />
+        <div *ngIf="doctorListShown">
+            <form *ngIf="doctorListShown" class="search-bar" [formGroup]="searchForm" (ngSubmit)="searchDoctors()">
+                <mat-form-field appearance="fill" class="specialty">
+                    <mat-label>Specialty</mat-label>
+                    <mat-select [(value)]="selectedSpecialty">
+                        <mat-option *ngFor="let specialty of specialties" [value]="specialty.name">
+                            {{specialty.description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="specialty">
+                    <mat-label>State</mat-label>
+                    <mat-select form-control-name="state" name="state">
+                        <mat-option *ngFor="let state of states" [value]="state">
+                            {{state}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-fab color="accent">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </form>
+        </div>
+
+        <div *ngIf="doctorListShown" class="doctor-list">
+            <div fxLayout="row wrap" fxLayoutGap="16px grid">
+                <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let doctor of doctors">
+                    <mat-card class="mat-elevation-z4">
+                        <mat-card-header>
+                            <mat-card-title>{{doctor.fullname}}</mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image [src]="defaultImageUrl" alt="doctor.fullname">
+                        <mat-card-content>
+                            <p>
+                                {{doctor.location.street}}, {{doctor.location.city}},
+                                {{doctor.location.state}}, {{doctor.location.zipcode}}
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button (click)="showDetail(doctor)">Detail</button>
+                            <button mat-button (click)="book()">Book</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!doctorListShown" class="doctor-detail">
+            <div class="detail-top-content">
+                <div class="top-left-content">
+                    <div class="detail-image">
+                        <img mat-card-image [src]="defaultImageUrl" alt="doctor.fullname">
+                    </div>
+                    <div>
+                        <div>
+                            <h1>Dr. {{detailDoctor?.fullname}}</h1>
+                        </div>
+                        <p>
+                            {{detailDoctor?.specialty}}
+                        </p>
+                        <p>
+                            {{detailDoctor?.location?.city}}, {{detailDoctor?.location?.state}}
+                        </p>
+                    </div>
+                </div>
+                <div class="top-right-most-content">
+                    <button mat-stroked-button color="primary" (click)="showList()">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                        Back To Search
+                    </button>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="detail-book">
+                <div class="book-datetime-picker">
+                    <mat-form-field>
+                        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [formControl]="dateControl"
+                            [disabled]="disabled" (dateChange)="bookedDateChanged($event)">
+                        <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                           [stepHour]="stepHour" [stepMinute]="stepMinute"
+                           [touchUi]="touchUi" color="primary" [enableMeridian]="enableMeridian" 
+                           [disableMinute]="disableMinute" [hideTime]="hideTime">
+                        </ngx-mat-datetime-picker>
+                     </mat-form-field>
+                </div>
+                <button mat-flat-button (click)="book()" color="primary">Book</button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="detail-main-content">
+                <div class="detail-degrees">
+                    <p class="degrees-title">Dr. {{detailDoctor?.fullname}}'s Degree</p>
+                    <p *ngIf="detailDoctor"><span *ngFor="let degree of detailDoctor?.degrees">{{degree}}</span></p>
+                </div>
+                <div class="detail-description">
+                    <p class="description-title">About Dr. {{detailDoctor?.fullname}}</p>
+                    <p>
+                        {{detailDoctor?.description}}
+                    </p>
+                </div>
+                <div class="detail-location">
+                    <p class="location-title">Office Location</p>
+                    <p>
+                        {{detailDoctor?.location?.street}}, {{detailDoctor?.location?.city}},
+                        {{detailDoctor?.location?.state}} {{detailDoctor?.location?.zipcode}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
