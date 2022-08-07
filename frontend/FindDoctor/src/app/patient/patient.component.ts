@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientComponent implements OnInit {
 
+  public appointments:string[] = ['District', 'District', 'District', 'District', 'District'];
+
   constructor() { }
 
   ngOnInit(): void {

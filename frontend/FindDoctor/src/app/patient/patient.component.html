@@ -1,1 +1,26 @@
-<p>patient works!</p>
+<mat-grid-list cols="4" rowHeight="220px" [gutterSize]="'10px'">
+  <ng-container *ngFor="let item of appointments">
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Dortor Strange</mat-card-title>
+        <mat-card-subtitle>(641) 819-1234</mat-card-subtitle>
+        <span class="example-spacer"></span>
+        <button mat-icon-button>
+          <mat-icon class="example-icon" color="warn">more_vert</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-chip-list>
+        <mat-chip color="primary" selected>Location: 414 N B St, Fairfield, Iowa</mat-chip>
+        <mat-chip color="primary" selected>Specialty: Eye</mat-chip>
+        <mat-chip color="primary" selected>Booking</mat-chip>
+        <mat-chip color="accent" selected>06:00 PM</mat-chip>
+        <mat-chip color="accent" selected>2 August 2022</mat-chip>
+      </mat-chip-list>
+    </mat-card>
+  </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>
+
+

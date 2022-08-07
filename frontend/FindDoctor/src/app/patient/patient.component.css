@@ -1,0 +1,25 @@
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+mat-card {
+  width: calc(100% - 50px);
+  height: calc(100% - 50px);
+}
+
+mat-grid-list {
+  margin: 10px;
+}
+
+.mat-chip-list {
+  width: 100px;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
