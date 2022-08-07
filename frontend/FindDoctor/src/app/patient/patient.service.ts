@@ -12,4 +12,11 @@ export class PatientService {
   getAppointments(username: string) {
     return this.http.get<Array<AppointmentPatient>>('http://localhost:3000/patients/' + username + '/appointment');
   }
+
+  cancelAppointments(username: string, doctor: string, time: number) {
+    return this.http.patch('http://localhost:3000/patients/' + username + '/appointment', {
+      doctorUsername: doctor,
+      time: time
+    });
+  }
 }

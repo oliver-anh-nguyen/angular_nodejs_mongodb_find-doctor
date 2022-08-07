@@ -21,7 +21,7 @@
               <mat-icon [matMenuTriggerFor]="menu" color="primary">more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="deleteAppointment()">
+              <button mat-menu-item (click)="deleteAppointment(item.doctor.username, item.time)">
                 <mat-icon>delete</mat-icon>
                 <span>Cancel</span>
               </button>

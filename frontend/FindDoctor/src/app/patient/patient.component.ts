@@ -14,7 +14,11 @@ export class PatientComponent implements OnInit {
   gridColumns = 4;
 
   constructor(private patientService: PatientService, private userService: UserService) {
-    let username = userService.getUserState()?.username;
+    this.getListAppointment();
+  }
+
+  getListAppointment() {
+    let username = this.userService.getUserState()?.username;
     if (username) {
       this.patientService.getAppointments(username)
         .subscribe(data => {
@@ -28,11 +32,18 @@ export class PatientComponent implements OnInit {
   }
 
   booking() {
-    console.log('go to booking view');
+
   }
 
-  deleteAppointment() {
+  deleteAppointment(usernameDoctor: string, time: number) {
     console.log('delete appointment');
+    let username = this.userService.getUserState()?.username;
+    if (username) {
+      this.patientService.cancelAppointments(username, usernameDoctor, time).subscribe(res => {
+        console.log(res);
+        this.getListAppointment();
+      })
+    }
   }
 
 }
