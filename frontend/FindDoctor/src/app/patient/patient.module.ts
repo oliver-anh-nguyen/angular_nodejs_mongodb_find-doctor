@@ -9,6 +9,7 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {MatMenuModule} from "@angular/material/menu";
     MatGridListModule,
     MatChipsModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    FlexLayoutModule
   ]
 })
 export class PatientModule { }

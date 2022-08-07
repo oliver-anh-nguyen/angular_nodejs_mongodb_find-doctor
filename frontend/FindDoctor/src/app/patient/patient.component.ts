@@ -11,6 +11,7 @@ import {AppointmentPatient} from "./AppointmentPatient";
 export class PatientComponent implements OnInit {
 
   public appointments:Array<AppointmentPatient>= [];
+  gridColumns = 4;
 
   constructor(private patientService: PatientService, private userService: UserService) {
     let username = userService.getUserState()?.username;

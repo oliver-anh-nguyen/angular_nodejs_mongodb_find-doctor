@@ -4,42 +4,46 @@
   <button mat-flat-button color="primary" (click)="booking()">Booking</button>
 </div>
 
-<div class="body-card">
-<mat-grid-list cols="3" rowHeight="220px" [gutterSize]="'10px'">
-  <ng-container *ngFor="let item of appointments">
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar *ngIf="item.doctor.avatarurl" [ngStyle]="{'background-image': 'url('+item.doctor.avatarurl+')'}" class="header-image"></div>
-        <div mat-card-avatar *ngIf="!item.doctor.avatarurl" class="header-image"></div>
-        <mat-card-title>{{item.doctor.fullname}}</mat-card-title>
-        <mat-card-subtitle>Specialty: {{item.doctor.specialty}}</mat-card-subtitle>
-        <span class="spacer"></span>
-        <div *ngIf="item.status === 'BOOKING' || item.status === 'CONFIRMED'">
-          <button mat-icon-button>
-            <mat-icon [matMenuTriggerFor]="menu" color="primary">more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="deleteAppointment()">
-              <mat-icon>delete</mat-icon>
-              <span>Cancel</span>
+<!--xs, sm, md, lg. xs is used for mobile screen sizes, sm for close to tablet size screens and md, lg for desktop.-->
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let item of appointments">
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar *ngIf="item.doctor.avatarurl"
+               [ngStyle]="{'background-image': 'url('+item.doctor.avatarurl+')'}" class="header-image"></div>
+          <div mat-card-avatar *ngIf="!item.doctor.avatarurl" class="header-image"></div>
+          <mat-card-title>{{item.doctor.fullname}}</mat-card-title>
+          <mat-card-subtitle>Specialty: {{item.doctor.specialty}}</mat-card-subtitle>
+          <span class="spacer"></span>
+          <div *ngIf="item.status === 'BOOKING' || item.status === 'CONFIRMED'">
+            <button mat-icon-button>
+              <mat-icon [matMenuTriggerFor]="menu" color="primary">more_vert</mat-icon>
             </button>
-          </mat-menu>
-        </div>
-      </mat-card-header>
-      <p class="phone" *ngIf="item.doctor.phone">Phone: +1 ({{item.doctor.phone | slice:0:3}}) {{item.doctor.phone | slice:3:6}}-{{item.doctor.phone | slice:6:10}}</p>
-      <p class="location" *ngIf="item.location">Location: {{item.location.street}}, {{item.location.city}}, {{item.location.state}}, {{item.location.zipcode}}</p>
-      <div class="line-bottom">
-        <span style="font-weight: bold; font-size: 17px">{{item.time | date:'shortTime'}}</span>
-        <span style="font-size: 13px; color:dimgrey">  {{item.time | date:'mediumDate'}}</span>
-        <span class="status" [ngClass]="{bookingClass: item.status === 'BOOKING',
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="deleteAppointment()">
+                <mat-icon>delete</mat-icon>
+                <span>Cancel</span>
+              </button>
+            </mat-menu>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="phone" *ngIf="item.doctor.phone">Phone: +1 ({{item.doctor.phone | slice:0:3}}
+            ) {{item.doctor.phone | slice:3:6}}-{{item.doctor.phone | slice:6:10}}</p>
+          <p class="location" *ngIf="item.location">Location: {{item.location.street}}, {{item.location.city}}
+            , {{item.location.state}}, {{item.location.zipcode}}</p>
+          <div class="line-bottom">
+            <span style="font-weight: bold; font-size: 17px">{{item.time | date:'shortTime'}}</span>
+            <span style="font-size: 13px; color:dimgrey">  {{item.time | date:'mediumDate'}}</span>
+            <span class="status" [ngClass]="{bookingClass: item.status === 'BOOKING',
         cancelClass: item.status === 'CANCELLED', confirmClass: item.status === 'CONFIRMED',
          completeClass: item.status === 'COMPLETED',  missClass: item.status === 'MISSED'}">
           {{item.status | titlecase}}</span>
-      </div>
-    </mat-card>
-  </mat-grid-tile>
-  </ng-container>
-</mat-grid-list>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
 
