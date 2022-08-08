@@ -50,5 +50,11 @@
 .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline,
 .mat-input-element:disabled {
   color: grey;
+}
 
+.button-update {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

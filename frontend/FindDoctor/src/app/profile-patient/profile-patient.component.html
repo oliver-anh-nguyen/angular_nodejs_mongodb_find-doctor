@@ -5,12 +5,9 @@
         <img mat-card-image [src]="avatarUrl">
       </div>
       <div class="avatar">
-        <mat-card-title>{{patient?.fullname}}</mat-card-title>
+        <mat-card-title>Username: {{patient?.username}}</mat-card-title>
       </div>
-      <div class="avatar">
-        <mat-card-subtitle>Username: {{patient?.username}}</mat-card-subtitle>
-      </div>
-      <div class="avatar">
+      <div class="button-update">
         <button mat-flat-button color="primary">Update Avatar</button>
       </div>
     </mat-card>
