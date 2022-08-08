@@ -1,12 +1,14 @@
 <div class="content-view">
   <div class="left">
     <mat-card>
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba1.jpg">
       <div class="avatar">
-        <mat-card-title>Oliver Nguyen</mat-card-title>
+        <img mat-card-image [src]="avatarUrl">
       </div>
       <div class="avatar">
-        <mat-card-subtitle>Username: dt1</mat-card-subtitle>
+        <mat-card-title>{{patient?.fullname}}</mat-card-title>
+      </div>
+      <div class="avatar">
+        <mat-card-subtitle>Username: {{patient?.username}}</mat-card-subtitle>
       </div>
       <div class="avatar">
         <button mat-flat-button color="primary">Update Avatar</button>
@@ -20,19 +22,19 @@
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Full Name</mat-label>
           <ng-container *ngIf="!isEdit">
-            <input matInput placeholder="Full Name" value="Oliver Nguyen" disabled="true">
+            <input matInput placeholder="Full Name" value={{patient?.fullname}} disabled="true">
           </ng-container>
           <ng-container *ngIf="isEdit">
-            <input matInput placeholder="Full Name" value="Oliver Nguyen">
+            <input matInput placeholder="Full Name" value={{patient?.fullname}}>
           </ng-container>
         </mat-form-field>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Phone Number</mat-label>
           <ng-container *ngIf="!isEdit">
-            <input matInput placeholder="Phone Number" value="+1 (641) 819-2598" disabled="true">
+            <input matInput placeholder="Phone Number" value={{patient?.phone}} disabled="true">
           </ng-container>
           <ng-container *ngIf="isEdit">
-            <input matInput placeholder="Phone Number" value="+1 (641) 819-2598">
+            <input matInput placeholder="Phone Number" value={{patient?.phone}}>
           </ng-container>
         </mat-form-field>
         <div class="avatar">

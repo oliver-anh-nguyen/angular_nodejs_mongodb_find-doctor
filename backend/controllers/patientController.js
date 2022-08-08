@@ -6,7 +6,7 @@ const StatusCodes = require('../utils/StatusCodes');
 async function getPatientById(req, res, next) {
     try {
         const {username} = req.params;
-        let patient = await patientModel.find({'username': username});
+        let patient = await patientModel.findOne({'username': username});
         res.status(StatusCodes.OK).json(patient);
     } catch (err) {
         next(err);

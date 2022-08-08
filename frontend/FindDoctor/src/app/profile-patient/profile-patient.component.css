@@ -22,7 +22,10 @@
 }
 
 .mat-card-image {
-  clip-path: circle(150px at center);
+  padding: 50px;
+  width: 200px;
+  height: 200px;
+  clip-path: circle(100px at center);
 }
 
 .edit-form {
@@ -41,7 +44,7 @@
 }
 
 .mat-card {
-  min-height: 520px;
+  min-height: 400px;
 }
 
 .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline,
