@@ -37,6 +37,8 @@ export class FindDoctorsComponent implements OnInit {
   dateControl = new UntypedFormControl();
   selectedTime: moment.Moment = moment(new Date());
 
+  commonSearches: Array<String>
+
   constructor(private fb: FormBuilder, private findDoctorService: FindDoctorsService, private userService: UserService) {
 
     this.specialties = [
@@ -94,6 +96,8 @@ export class FindDoctorsComponent implements OnInit {
       'Wyoming'
     ]
 
+    this.commonSearches = ['Dentist', 'Cardiologist', 'Gastroenterologist', 'Podiatrists', 'Pulmonologists'];
+
     this.searchForm = fb.group({
       specialty: this.specialties[0],
       state: this.states[0]
@@ -105,6 +109,16 @@ export class FindDoctorsComponent implements OnInit {
     console.log(this.selectedSpecialty);
     console.log(this.searchForm.value);
     this.findDoctorService.searchDoctors(this.selectedSpecialty, this.selectedState).subscribe(
+      doctors => {
+        console.log(doctors);
+        this.doctors = doctors;
+      }
+    );
+  }
+
+  searchCommonDoctors(specialty: String) {
+    specialty = specialty.toLowerCase();
+    this.findDoctorService.searchDoctors(specialty, null).subscribe(
       doctors => {
         console.log(doctors);
         this.doctors = doctors;

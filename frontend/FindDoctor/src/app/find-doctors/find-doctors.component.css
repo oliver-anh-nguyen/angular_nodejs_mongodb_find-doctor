@@ -1,11 +1,12 @@
 .search-segment {
-  background-color: rgb(224, 243, 250);
   width: 100%;
-  height: 300px;
-  /* margin-top: 0; */
 }
 
-.container {
+.search-container-alignment {
+  background-color: rgb(224, 243, 250);
+}
+
+.search-container {
   margin-left: 50px;
   margin-right: 50px;
   padding-top: 100px;
@@ -25,6 +26,15 @@
 
 .doctor-list {
   background-color: gainsboro;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.common-search-label, .doctor-list-label {
+  color: rgb(40, 57, 133);
+  font-size: 45px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .doctor-detail {
@@ -41,17 +51,32 @@
   clip-path: circle(30px at center);
 }
 
-mat-card {
+.mat-card {
   min-width: 200px;
   margin-bottom: 20px;
 }
 
-mat-toolbar {
+.mat-toolbar {
   justify-content: space-between;
 }
 
-mat-card-actions {
+.mat-card-actions {
   justify-content: space-between;
+}
+
+.common-search-card:hover {
+  cursor: pointer;
+  box-shadow: 0px 2px 4px -1px cornflowerblue, 0px 4px 5px 0px cornflowerblue,
+    0px 1px 10px 0px cornflowerblue;
+}
+
+.common-search-image {
+  width: calc(100% - 40px);
+  margin: 24px -16px 16px 16px;
+}
+
+.common-search-title {
+  text-align: center;
 }
 
 .detail-top-content {
@@ -68,15 +93,17 @@ mat-card-actions {
 }
 
 .top-left-content {
-    margin: 20px;
-    display: flex;
-    align-items: center;
-}    
-
-.detail-main-content {
-    margin: 20px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
 }
 
-.degrees-title, .description-title, .location-title {
-    font-weight: bold;
+.detail-main-content {
+  margin: 20px;
+}
+
+.degrees-title,
+.description-title,
+.location-title {
+  font-weight: bold;
 }
