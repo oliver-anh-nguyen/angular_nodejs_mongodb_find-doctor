@@ -31,15 +31,8 @@ export class AppComponent implements OnDestroy {
     })
 
     this.userService.refreshState();
-
     const userState = this.userService.getUserState();
-    if (userState?.username) {
-      if (userState?.role === 'PATIENT') {
-        this.router.navigate(['/', 'patient']);
-      } else {
-        this.router.navigate(['/', 'doctor']);
-      }
-    } else {
+    if (!userState) {
       this.router.navigate(['/', 'login']);
     }
   }
@@ -59,7 +52,9 @@ export class AppComponent implements OnDestroy {
   }
 
   profile() {
-
+    if (this.isPatient()) {
+      this.router.navigate(['/', 'profile-patient']);
+    }
   }
 
   appointments() {

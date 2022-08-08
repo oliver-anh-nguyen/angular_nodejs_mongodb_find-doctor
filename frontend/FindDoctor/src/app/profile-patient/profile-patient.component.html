@@ -1,0 +1,49 @@
+<div class="content-view">
+  <div class="left">
+    <mat-card>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+      <div class="avatar">
+        <mat-card-title>Oliver Nguyen</mat-card-title>
+      </div>
+      <div class="avatar">
+        <mat-card-subtitle>Username: dt1</mat-card-subtitle>
+      </div>
+      <div class="avatar">
+        <button mat-flat-button color="primary">Update Avatar</button>
+      </div>
+    </mat-card>
+  </div>
+  <div class="right">
+    <mat-card>
+      <mat-card-title class="update-title">Update Profile</mat-card-title>
+      <form class="edit-form">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Full Name</mat-label>
+          <ng-container *ngIf="!isEdit">
+            <input matInput placeholder="Full Name" value="Oliver Nguyen" disabled="true">
+          </ng-container>
+          <ng-container *ngIf="isEdit">
+            <input matInput placeholder="Full Name" value="Oliver Nguyen">
+          </ng-container>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Phone Number</mat-label>
+          <ng-container *ngIf="!isEdit">
+            <input matInput placeholder="Phone Number" value="+1 (641) 819-2598" disabled="true">
+          </ng-container>
+          <ng-container *ngIf="isEdit">
+            <input matInput placeholder="Phone Number" value="+1 (641) 819-2598">
+          </ng-container>
+        </mat-form-field>
+        <div class="avatar">
+          <ng-container *ngIf="!isEdit">
+            <button mat-flat-button color="primary" (click)="edit()">Edit</button>
+          </ng-container>
+          <ng-container *ngIf="isEdit">
+            <button mat-flat-button color="warn" (click)="edit()">Save</button>
+          </ng-container>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
