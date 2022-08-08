@@ -14,7 +14,11 @@
       <mat-icon>account_box</mat-icon>
       <span>Profile</span>
     </button>
-    <button mat-menu-item (click)="search()">
+    <button mat-menu-item (click)="appointments()">
+      <mat-icon>calendar_today</mat-icon>
+      <span>Appointments</span>
+    </button>
+    <button mat-menu-item *ngIf="isPatient()" (click)="search()">
       <mat-icon>search</mat-icon>
       <span>Find Doctor</span>
     </button>

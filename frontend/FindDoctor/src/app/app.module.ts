@@ -16,8 +16,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptor } from "./token.interceptor";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
-// import { MatDatepickerModule } from '@matheo/datepicker';
-// import { MatNativeDateModule } from '@matheo/datepicker/core';
 
 @NgModule({
   declarations: [
@@ -37,8 +35,6 @@ import {MatIconModule} from "@angular/material/icon";
     MatButtonModule,
     MatMenuModule,
     MatIconModule
-    // MatDatepickerModule,
-    // MatNativeDateModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]

@@ -44,13 +44,26 @@ export class AppComponent implements OnDestroy {
     }
   }
 
+  isPatient(): boolean {
+    const userState = this.userService.getUserState();
+    if (userState?.role === 'PATIENT') {
+      return true
+    }
+    return false
+  }
+
   search() {
-    this.router.navigate(['/', 'find-doctors']);
+    if (this.isPatient()) {
+      this.router.navigate(['/', 'find-doctors']);
+    }
   }
 
   profile() {
-    const userState = this.userService.getUserState();
-    if (userState?.role === 'PATIENT') {
+
+  }
+
+  appointments() {
+    if (this.isPatient()) {
       this.router.navigate(['/', 'patient']);
     } else {
       this.router.navigate(['/', 'doctor']);

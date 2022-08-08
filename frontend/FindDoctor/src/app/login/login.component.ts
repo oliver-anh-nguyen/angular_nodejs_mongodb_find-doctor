@@ -35,7 +35,6 @@ export class LoginComponent {
         } else {
           this.router.navigate(['/', 'doctor'])
         }
-
       });
   }
 

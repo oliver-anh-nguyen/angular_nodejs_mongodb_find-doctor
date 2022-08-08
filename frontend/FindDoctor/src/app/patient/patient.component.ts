@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PatientService} from "./patient.service";
 import {UserService} from "../login/user.service";
 import {AppointmentPatient} from "./AppointmentPatient";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-patient',
@@ -13,7 +14,7 @@ export class PatientComponent implements OnInit {
   public appointments:Array<AppointmentPatient>= [];
   gridColumns = 4;
 
-  constructor(private patientService: PatientService, private userService: UserService) {
+  constructor(private patientService: PatientService, private userService: UserService, private router: Router) {
     this.getListAppointment();
   }
 
@@ -32,7 +33,7 @@ export class PatientComponent implements OnInit {
   }
 
   booking() {
-
+    this.router.navigate(['/', 'find-doctors']);
   }
 
   deleteAppointment(usernameDoctor: string, time: number) {
