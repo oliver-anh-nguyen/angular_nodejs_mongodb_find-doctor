@@ -107,7 +107,7 @@ async function updateInfoPatient(req, res, next) {
 
         console.log(username, fullname, avatarurl);
 
-        if (req.file.location) {
+        if (req.file && req.file.location) {
             console.log('there is file uploaded: ', req.file.location);
             avatarurl = req.file.location;
         } else {
