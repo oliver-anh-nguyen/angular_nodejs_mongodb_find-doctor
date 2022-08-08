@@ -1,12 +1,12 @@
 <mat-toolbar color="primary">
   <button mat-icon-button (click)="search()">
-    <img class="profile-image clip-circle" src="../assets/images/findDoctor.png" alt="Doctor Search" />
+    <img class="profile-image clip-circle" src="../assets/images/findDoctor.png" alt="Doctor Search"/>
   </button>
-  <span>Doctor Search</span>
+  <span class="text-find">Find Doctor</span>
   <span class="between-spacer"></span>
   <span class="welcome-text" *ngIf="isLoggedIn" (click)="profile()">Welcome, {{username}}</span>
   <button mat-icon-button color="image" [matMenuTriggerFor]="menu" *ngIf="isLoggedIn">
-    <img class="profile-image clip-circle" [src]="avatarUrl" alt="Person" />
+    <img class="profile-image clip-circle" [src]="avatarUrl" alt="Person"/>
   </button>
 
   <mat-menu #menu="matMenu">
@@ -34,31 +34,32 @@
   <router-outlet></router-outlet>
 </div>
 
-<div class="footer">
+<mat-toolbar class="footer" color="primary">
   <div fxLayout="row wrap" fxLayoutGap="grid">
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
       <div class="footer-column">
-        <img class="profile-image clip-circle" src="../assets/images/findDoctor.png" alt="Doctor Search" />
-        <span class="footer-brand">FindDoctor</span>
+        <div style="padding-top: 15px">
+          <span>Find Doctor</span>
+        </div>
         <div class="footer-title">Connect Us On</div>
         <a href="https://www.instagram.com">
-          <img class="social-image" src="../assets/images/instagram.png" />
+          <img class="social-image" src="../assets/images/instagram.png"/>
         </a>
         <a href="https://www.facebook.com">
-          <img class="social-image" src="../assets/images/facebook.png" />
+          <img class="social-image" src="../assets/images/facebook.png"/>
         </a>
         <a href="https://www.twitter.com">
-          <img class="social-image" src="../assets/images/twitter.png" />
+          <img class="social-image" src="../assets/images/twitter.png"/>
         </a>
         <a href="https://www.youtube.com">
-          <img class="social-image" src="../assets/images/youtube.png" />
+          <img class="social-image" src="../assets/images/youtube.png"/>
         </a>
         <a href="https://www.linkedin.com">
-          <img class="social-image" src="../assets/images/linkedin.png" />
+          <img class="social-image" src="../assets/images/linkedin.png"/>
         </a>
       </div>
     </div>
-    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <div style="padding-left: 100px" fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
       <div class="footer-column">
         <div class="footer-title">Policies</div>
         <div><a class="nav-link" [routerLink]="['/find-doctors']">Privacy Policy</a></div>
@@ -66,7 +67,7 @@
         <div><a class="nav-link" [routerLink]="['/find-doctors']">Terms of Use</a></div>
       </div>
     </div>
-    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <div style="padding-left: 100px" fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
       <div class="footer-column">
         <div class="footer-title">About</div>
         <div><a class="nav-link" [routerLink]="['/find-doctors']">About FindDoctor</a></div>
@@ -74,7 +75,7 @@
         <div><a class="nav-link" [routerLink]="['/find-doctors']">Careers</a></div>
       </div>
     </div>
-    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <div style="padding-left: 75px" fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
       <div class="footer-column">
         <div class="footer-title">Partner</div>
         <div><a class="nav-link" [routerLink]="['/find-doctors']">Register as Doctor</a></div>
@@ -82,7 +83,7 @@
       </div>
     </div>
   </div>
-</div>
+</mat-toolbar>
 <ng-container *ngIf="loading$ | async">
   <div class="overlay"></div>
   <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
