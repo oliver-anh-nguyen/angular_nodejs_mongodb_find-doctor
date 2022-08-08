@@ -40,7 +40,7 @@ export class PatientComponent implements OnInit {
     console.log('delete appointment');
     let username = this.userService.getUserState()?.username;
     if (username) {
-      this.patientService.cancelAppointments(username, usernameDoctor, time).subscribe(res => {
+      this.patientService.cancelAppointment(username, usernameDoctor, time).subscribe(res => {
         console.log(res);
         this.getListAppointment();
       })

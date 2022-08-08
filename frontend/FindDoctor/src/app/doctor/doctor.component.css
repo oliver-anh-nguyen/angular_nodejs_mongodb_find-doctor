@@ -1,0 +1,66 @@
+h1 {
+  margin: 20px;
+  font-weight: initial;
+}
+.no-appoint {
+  margin: 20px;
+  font-weight: initial;
+}
+
+.header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.status {
+  font-weight: bold;
+  margin-right: 10px;
+  float:right
+}
+
+.line-bottom {
+  padding-top: 20px;
+}
+
+.bookingClass {
+  color: navy;
+}
+
+.cancelClass {
+  color: red;
+}
+
+.missClass {
+  color: red;
+}
+
+.completeClass {
+  color: chocolate;
+}
+
+.confirmClass {
+  color: green;
+}
+
+.location {
+  font-weight: lighter;
+  font-size: small;
+  color: grey;
+}
+
+.phone {
+  font-weight: lighter;
+  font-size: small;
+}
+
+.content {
+  padding: 20px;
+}
+
+.content > mat-card {
+  margin-bottom: 10px;
+}

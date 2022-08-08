@@ -1,1 +1,51 @@
-<p>doctor works!</p>
+<h1>List Appointments</h1>
+<div class="no-appoint" *ngIf="appointments.length == 0">
+  <h2>You don't have an appointment!</h2>
+</div>
+
+<!--xs, sm, md, lg. xs is used for mobile screen sizes, sm for close to tablet size screens and md, lg for desktop.-->
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let item of appointments">
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar *ngIf="item.patient.avatarurl"
+               [ngStyle]="{'background-image': 'url('+item.patient.avatarurl+')'}" class="header-image"></div>
+          <div mat-card-avatar *ngIf="!item.patient.avatarurl" class="header-image"></div>
+          <mat-card-title>{{item.patient.fullname}}</mat-card-title>
+          <span class="spacer"></span>
+          <div *ngIf="item.status === 'BOOKING' || item.status === 'CONFIRMED'">
+            <button mat-icon-button>
+              <mat-icon [matMenuTriggerFor]="menu" color="primary">more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="updateAppointment(item.patient.username, item.time)">
+                <mat-icon>confirmation_number</mat-icon>
+                <span>Confirm</span>
+              </button>
+              <button mat-menu-item (click)="updateAppointment(item.patient.username, item.time)">
+                <mat-icon>cancel</mat-icon>
+                <span>Cancel</span>
+              </button>
+              <button mat-menu-item (click)="updateAppointment(item.patient.username, item.time)">
+                <mat-icon>check</mat-icon>
+                <span>Completed</span>
+              </button>
+            </mat-menu>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="phone" *ngIf="item.patient.phone">{{item.patient.phone | validPhone }}</p>
+          <div class="line-bottom">
+            <span style="font-weight: bold; font-size: 17px">{{item.time | date:'shortTime'}}</span>
+            <span style="font-size: 13px; color:dimgrey">  {{item.time | date:'mediumDate'}}</span>
+            <span class="status" [ngClass]="{bookingClass: item.status === 'BOOKING',
+        cancelClass: item.status === 'CANCELLED', confirmClass: item.status === 'CONFIRMED',
+         completeClass: item.status === 'COMPLETED',  missClass: item.status === 'MISSED'}">
+          {{item.status | titlecase}}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
