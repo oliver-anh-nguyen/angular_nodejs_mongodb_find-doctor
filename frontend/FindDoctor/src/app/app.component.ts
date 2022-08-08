@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
 import {Router} from "@angular/router";
 import {UserService} from "./login/user.service";
+import {LoadingService} from "./loading.service";
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,14 @@ import {UserService} from "./login/user.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy {
+  loading$ = this.loader.loading$;
   isLoggedIn: boolean = false;
   sub!: Subscription;
   username: string = '';
   DEFAULT_AVATAR_URL = '../assets/images/person-black-icon.png';
   avatarUrl = '';
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router,
+              public loader: LoadingService) {
     this.sub = this.userService.userState$.subscribe(userState => {
       console.log(userState)
       if (userState && userState.token) {

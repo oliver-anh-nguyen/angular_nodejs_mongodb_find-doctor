@@ -17,6 +17,7 @@ import { TokenInterceptor } from "./token.interceptor";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatProgressSpinnerModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
