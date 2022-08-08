@@ -3,6 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {User} from "./UserInterface";
 import jwtDecode from "jwt-decode";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UserService {
   constructor(private  http: HttpClient) { }
 
   login(username: string, password: string) {
-    return this.http.post<{token: string}>('http://localhost:3000/users/login', {username, password});
+    return this.http.post<{token: string}>(`${environment.baseUrl}users/login`, {username, password});
   }
 
   getUserState(): User | null {

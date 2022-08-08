@@ -3,6 +3,7 @@ import {AppointmentPatient} from "../patient/AppointmentPatient";
 import {ProfilePatient} from "./ProfilePatient";
 import {ProfilePatientService} from "./profile-patient.service";
 import {UserService} from "../login/user.service";
+import { UploadFileService } from './upload-file.service';
 
 @Component({
   selector: 'app-profile-patient',
@@ -10,13 +11,15 @@ import {UserService} from "../login/user.service";
   styleUrls: ['./profile-patient.component.css']
 })
 export class ProfilePatientComponent implements OnInit {
-
   public patient:ProfilePatient | null = null;
   isEdit: boolean = false;
   fullname: string = 'Full Name';
   avatarUrl = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
   phone: string = '';
-  constructor(private profileService: ProfilePatientService, private userService: UserService) {
+  isAvatarEditing: boolean = false;
+  file: File | null = null;
+
+  constructor(private profileService: ProfilePatientService, private userService: UserService, private uploadFileService: UploadFileService) {
     this.getInfoPatient()
   }
 
@@ -32,7 +35,7 @@ export class ProfilePatientComponent implements OnInit {
       })
     }
   }
-
+  
   ngOnInit(): void {
   }
 
@@ -48,6 +51,28 @@ export class ProfilePatientComponent implements OnInit {
         console.log(data);
         alert("Update Successfully!");
       })
+    }
+  }
+
+  changeImage(event: any) {
+    this.file = event.target.files[0];
+  }
+
+  editAvatar() {
+    this.isAvatarEditing = true;
+  }
+
+  uploadAvatar() {
+    if (this.file) {
+      console.log('going to upload file: ', this.file);
+      const user = this.userService.getUserState();
+      this.uploadFileService.uploadUserProfile(user, this.file).subscribe(result => {
+        console.log(result);
+        this.isAvatarEditing = false;
+      });
+    } else {
+      console.log('There is no selected file');
+      alert('There is no file selected.');
     }
   }
 }
