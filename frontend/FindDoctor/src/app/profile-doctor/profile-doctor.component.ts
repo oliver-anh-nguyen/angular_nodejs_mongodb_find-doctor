@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../login/user.service";
 import {ProfileDoctor} from "./ProfileDoctor";
-import {ProfileDoctorService} from "./profile-doctor.service";
 import {Specialty} from "../find-doctors/SpecialtyInterface";
 import {FindDoctorsService} from "../find-doctors/find-doctors.service";
+import { ProfileService } from '../common/profile.service';
 
 @Component({
   selector: 'app-profile-doctor',
@@ -25,7 +25,7 @@ export class ProfileDoctorComponent implements OnInit {
   city: string = '';
   state: string = '';
   zipcode: string = '';
-  constructor(private findDoctorService: FindDoctorsService, private doctorService: ProfileDoctorService, private userService: UserService) {
+  constructor(private findDoctorService: FindDoctorsService, private profileService: ProfileService, private userService: UserService) {
     this.specialties = [
     ]
     this.getInfoPatient()
@@ -34,7 +34,7 @@ export class ProfileDoctorComponent implements OnInit {
   getInfoPatient() {
     let username = this.userService.getUserState()?.username;
     if (username) {
-      this.doctorService.getInfo(username).subscribe(profile => {
+      this.profileService.getDoctorInfo(username).subscribe(profile => {
         console.log(profile);
         this.doctor = profile;
         this.avatarUrl = this.doctor.avatarurl;
