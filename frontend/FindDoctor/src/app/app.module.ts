@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptor } from "./token.interceptor";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatIconModule} from "@angular/material/icon";
 // import { MatDatepickerModule } from '@matheo/datepicker';
 // import { MatNativeDateModule } from '@matheo/datepicker/core';
 
@@ -33,6 +35,8 @@ import { TokenInterceptor } from "./token.interceptor";
     MatInputModule,
     MatToolbarModule,
     MatButtonModule,
+    MatMenuModule,
+    MatIconModule
     // MatDatepickerModule,
     // MatNativeDateModule
   ],

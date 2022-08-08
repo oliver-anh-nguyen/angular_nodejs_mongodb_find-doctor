@@ -21,7 +21,7 @@ export class AppComponent implements OnDestroy {
         this.isLoggedIn = true
         this.username = this.userService.getUserState()?.fullname as string;
         this.avatarUrl = this.userService.getUserState()?.avatarurl as string;
-        console.log(this.avatarUrl);  
+        console.log(this.avatarUrl);
         if (!this.avatarUrl || this.avatarUrl.trim().length === 0) {
           this.avatarUrl = this.DEFAULT_AVATAR_URL;
         }
@@ -35,12 +35,25 @@ export class AppComponent implements OnDestroy {
     const userState = this.userService.getUserState();
     if (userState?.username) {
       if (userState?.role === 'PATIENT') {
-        this.router.navigate(['/', 'find-doctors']);
+        this.router.navigate(['/', 'patient']);
       } else {
         this.router.navigate(['/', 'doctor']);
       }
     } else {
       this.router.navigate(['/', 'login']);
+    }
+  }
+
+  search() {
+    this.router.navigate(['/', 'find-doctors']);
+  }
+
+  profile() {
+    const userState = this.userService.getUserState();
+    if (userState?.role === 'PATIENT') {
+      this.router.navigate(['/', 'patient']);
+    } else {
+      this.router.navigate(['/', 'doctor']);
     }
   }
 

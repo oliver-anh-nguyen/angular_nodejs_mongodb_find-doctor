@@ -1,10 +1,28 @@
 <mat-toolbar color="primary">
-  <span>Doctor Search</span>
+  <button mat-icon-button (click)="search()">
+    <mat-icon>search</mat-icon>
+  </button>
+  <span (click)="search()">Doctor Search</span>
   <span class="between-spacer"></span>
-  <span class="welcome-text" *ngIf="isLoggedIn">Welcome {{username}}</span>
-  <button mat-icon-button color="image" (click)="logout()" *ngIf="isLoggedIn" >
+  <span class="welcome-text" *ngIf="isLoggedIn" (click)="profile()">Welcome, {{username}}</span>
+  <button mat-icon-button color="image" [matMenuTriggerFor]="menu" *ngIf="isLoggedIn" >
     <img class="profile-image clip-circle" [src]="avatarUrl" alt="Person" />
   </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="profile()">
+      <mat-icon>account_box</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button mat-menu-item (click)="search()">
+      <mat-icon>search</mat-icon>
+      <span>Find Doctor</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
 
 </mat-toolbar>
 <router-outlet></router-outlet>
