@@ -22,19 +22,19 @@
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Full Name</mat-label>
           <ng-container *ngIf="!isEdit">
-            <input matInput placeholder="Full Name" value={{patient?.fullname}} disabled="true">
+            <input matInput placeholder="Full Name" [(ngModel)]="fullname" name="fullname" value={{patient?.fullname}} disabled="true">
           </ng-container>
           <ng-container *ngIf="isEdit">
-            <input matInput placeholder="Full Name" value={{patient?.fullname}}>
+            <input matInput placeholder="Full Name" [(ngModel)]="fullname" name="fullname" value={{patient?.fullname}}>
           </ng-container>
         </mat-form-field>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Phone Number</mat-label>
           <ng-container *ngIf="!isEdit">
-            <input matInput placeholder="Phone Number" value={{patient?.phone}} disabled="true">
+            <input matInput placeholder="Phone Number" [(ngModel)]="phone" name="phone" value={{patient?.phone}} disabled="true">
           </ng-container>
           <ng-container *ngIf="isEdit">
-            <input matInput placeholder="Phone Number" value={{patient?.phone}}>
+            <input matInput placeholder="Phone Number" [(ngModel)]="phone" name="phone" value={{patient?.phone}}>
           </ng-container>
         </mat-form-field>
         <div class="avatar">
@@ -42,7 +42,7 @@
             <button mat-flat-button color="primary" (click)="edit()">Edit</button>
           </ng-container>
           <ng-container *ngIf="isEdit">
-            <button mat-flat-button color="warn" (click)="edit()">Save</button>
+            <button mat-flat-button color="warn" (click)="save()">Save</button>
           </ng-container>
         </div>
       </form>

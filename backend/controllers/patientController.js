@@ -2,6 +2,7 @@ const patientModel = require('../models/patientModel');
 const doctorModel = require('../models/doctorModel');
 const userModel = require('../models/userModel');
 const StatusCodes = require('../utils/StatusCodes');
+const Patient = require("../models/patientModel");
 
 async function getPatientById(req, res, next) {
     try {
@@ -118,10 +119,11 @@ async function updateInfoPatient(req, res, next) {
         })
 
         // update info user in appointments
+        const filters = { 'arrayFilters': [{ 'ele.patient.username': username }], 'multi': true }
         await doctorModel.updateMany({ 'appointment.patient.username': username},
-            {'appointment.$.patient.fullname': fullname,
-                'appointment.$.patient.phone': phone,
-                'appointment.$.patient.avatarurl': avatarurl}
+            {'appointment.$[ele].patient.fullname': fullname,
+                'appointment.$[ele].patient.phone': phone,
+                'appointment.$[ele].patient.avatarurl': avatarurl}, filters
         );
 
         res.status(StatusCodes.OK).json(`PATIENT: update profile successfully!`);

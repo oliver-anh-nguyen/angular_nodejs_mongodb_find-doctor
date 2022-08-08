@@ -12,4 +12,12 @@ export class ProfilePatientService {
   getInfo(username: string) {
     return this.http.get<ProfilePatient>('http://localhost:3000/patients/' + username);
   }
+
+  updateInfo(username: string, fullname: string, avatar: string, phone: string) {
+    return this.http.patch('http://localhost:3000/patients/' + username + '/update', {
+      fullname: fullname,
+      avatarurl: avatar,
+      phone: phone
+    })
+  }
 }

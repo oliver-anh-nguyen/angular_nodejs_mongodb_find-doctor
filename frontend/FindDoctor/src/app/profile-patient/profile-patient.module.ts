@@ -6,6 +6,7 @@ import { ProfilePatientComponent } from './profile-patient.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {MatInputModule} from "@angular/material/input";
     ProfilePatientRoutingModule,
     MatCardModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule
   ]
 })
 export class ProfilePatientModule { }

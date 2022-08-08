@@ -13,8 +13,9 @@ export class ProfilePatientComponent implements OnInit {
 
   public patient:ProfilePatient | null = null;
   isEdit: boolean = false;
+  fullname: string = 'Full Name';
   avatarUrl = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
-
+  phone: string = '';
   constructor(private profileService: ProfilePatientService, private userService: UserService) {
     this.getInfoPatient()
   }
@@ -26,6 +27,8 @@ export class ProfilePatientComponent implements OnInit {
         console.log(profile);
         this.patient = profile;
         this.avatarUrl = this.patient.avatarurl;
+        this.phone = this.patient.phone;
+        this.fullname = this.patient.fullname;
       })
     }
   }
@@ -39,5 +42,12 @@ export class ProfilePatientComponent implements OnInit {
 
   save() {
     this.isEdit = false;
+    let username = this.userService.getUserState()?.username;
+    if (username) {
+      this.profileService.updateInfo(username, this.fullname, this.avatarUrl, this.phone).subscribe(data => {
+        console.log(data);
+        alert("Update Successfully!");
+      })
+    }
   }
 }
