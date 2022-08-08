@@ -143,8 +143,8 @@ async function getAllAppointments(req, res, next) {
 async function updateAppointment(req, res, next) {
     const supportedStatus = ['BOOKING', 'CONFIRMED', 'CANCELLED', 'COMPLETED', 'MISSED']
     try {
-        const { username, patientUsername, time } = req.params;
-        const { status } = req.body;
+        const { username } = req.params;
+        const { status, patientUsername, time } = req.body;
         if (!status || supportedStatus.findIndex(s => s == status) < 0) {
             return res.status(StatusCodes.BAD_REQUEST).json({ 'error': 'invalid status' });
         }

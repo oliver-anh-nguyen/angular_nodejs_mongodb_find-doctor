@@ -31,8 +31,15 @@ export class DoctorComponent implements OnInit {
     }
   }
 
-  updateAppointment(usernameDoctor: string, time: number) {
-
+  updateAppointment(usernameDoctor: string, time: number, status: string) {
+    console.log('delete appointment');
+    let username = this.userService.getUserState()?.username;
+    if (username) {
+      this.doctorService.updateAppointment(username, usernameDoctor, time, status).subscribe(res => {
+        console.log(res);
+        this.getListAppointment();
+      })
+    }
   }
 
   ngOnInit(): void {

@@ -7,6 +7,6 @@ router.get('/search', doctorController.search);
 router.get('/:username', doctorController.getByUsername);
 router.patch('/:username', doctorController.update);
 router.get('/:username/appointments', doctorController.getAllAppointments);
-router.patch('/:username/appointments/:patientUsername/:time', doctorController.updateAppointment);
+router.patch('/:username/appointment', doctorController.updateAppointment);
 
 module.exports = router;

@@ -14,7 +14,11 @@ export class DoctorService {
     return this.http.get<Array<AppointmentDoctor>>('http://localhost:3000/doctors/' + username + '/appointments');
   }
 
-  updateAppointment(username: string, doctor: string, time: number) {
-
+  updateAppointment(username: string, patient: string, time: number, status: string) {
+    return this.http.patch('http://localhost:3000/doctors/' + username + '/appointment', {
+      patientUsername: patient,
+      time: time,
+      status: status
+    });
   }
 }

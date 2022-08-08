@@ -19,15 +19,15 @@
               <mat-icon [matMenuTriggerFor]="menu" color="primary">more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="updateAppointment(item.patient.username, item.time)">
+              <button mat-menu-item (click)="updateAppointment(item.patient.username, item.time, 'CONFIRMED')">
                 <mat-icon>confirmation_number</mat-icon>
                 <span>Confirm</span>
               </button>
-              <button mat-menu-item (click)="updateAppointment(item.patient.username, item.time)">
+              <button mat-menu-item (click)="updateAppointment(item.patient.username, item.time, 'CANCELLED')">
                 <mat-icon>cancel</mat-icon>
                 <span>Cancel</span>
               </button>
-              <button mat-menu-item (click)="updateAppointment(item.patient.username, item.time)">
+              <button mat-menu-item (click)="updateAppointment(item.patient.username, item.time, 'COMPLETED')">
                 <mat-icon>check</mat-icon>
                 <span>Completed</span>
               </button>
