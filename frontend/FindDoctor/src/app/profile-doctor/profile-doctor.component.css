@@ -1,6 +1,5 @@
 .content-view {
-  margin:20px;
-  /*background-color: rgba(0, 0, 255, .5);*/
+  padding:20px;
   display: flex;
 }
 
