@@ -1,11 +1,11 @@
 <mat-toolbar color="primary">
   <button mat-icon-button (click)="search()">
-    <mat-icon>search</mat-icon>
+    <img class="profile-image clip-circle" src="../assets/images/findDoctor.png" alt="Doctor Search" />
   </button>
-  <span (click)="search()">Doctor Search</span>
+  <span>Doctor Search</span>
   <span class="between-spacer"></span>
   <span class="welcome-text" *ngIf="isLoggedIn" (click)="profile()">Welcome, {{username}}</span>
-  <button mat-icon-button color="image" [matMenuTriggerFor]="menu" *ngIf="isLoggedIn" >
+  <button mat-icon-button color="image" [matMenuTriggerFor]="menu" *ngIf="isLoggedIn">
     <img class="profile-image clip-circle" [src]="avatarUrl" alt="Person" />
   </button>
 
