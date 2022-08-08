@@ -14,3 +14,35 @@
 .clip-circle {
   clip-path: circle(20px at center);
 }
+
+.main-content {
+  min-height: 750px;
+}
+
+.footer {
+  margin-top: auto;
+  background-color: lightblue;
+  width: 100%;
+}
+
+.footer-column {
+  margin: 10px 0 10px 20px;
+}
+
+.footer-brand {
+  font-size: large;
+  font-weight: bold;
+}
+
+.footer-title {
+  font-size: large;
+  margin-bottom: 6px;
+}
+
+.social-image {
+  width: 30px;
+  height: 30px;
+  clip-path: circle(15px at center);
+  margin-left: 5px;
+  margin-right: 5px;
+}

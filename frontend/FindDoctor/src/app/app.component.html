@@ -29,4 +29,57 @@
   </mat-menu>
 
 </mat-toolbar>
-<router-outlet></router-outlet>
+
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="footer">
+  <div fxLayout="row wrap" fxLayoutGap="grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+      <div class="footer-column">
+        <img class="profile-image clip-circle" src="../assets/images/findDoctor.png" alt="Doctor Search" />
+        <span class="footer-brand">FindDoctor</span>
+        <div class="footer-title">Connect Us On</div>
+        <a href="https://www.instagram.com">
+          <img class="social-image" src="../assets/images/instagram.png" />
+        </a>
+        <a href="https://www.facebook.com">
+          <img class="social-image" src="../assets/images/facebook.png" />
+        </a>
+        <a href="https://www.twitter.com">
+          <img class="social-image" src="../assets/images/twitter.png" />
+        </a>
+        <a href="https://www.youtube.com">
+          <img class="social-image" src="../assets/images/youtube.png" />
+        </a>
+        <a href="https://www.linkedin.com">
+          <img class="social-image" src="../assets/images/linkedin.png" />
+        </a>
+      </div>
+    </div>
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+      <div class="footer-column">
+        <div class="footer-title">Policies</div>
+        <div><a class="nav-link" [routerLink]="['/find-doctors']">Privacy Policy</a></div>
+        <div><a class="nav-link" [routerLink]="['/find-doctors']">Cookie Policy</a></div>
+        <div><a class="nav-link" [routerLink]="['/find-doctors']">Terms of Use</a></div>
+      </div>
+    </div>
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+      <div class="footer-column">
+        <div class="footer-title">About</div>
+        <div><a class="nav-link" [routerLink]="['/find-doctors']">About FindDoctor</a></div>
+        <div><a class="nav-link" [routerLink]="['/find-doctors']">Contact Us</a></div>
+        <div><a class="nav-link" [routerLink]="['/find-doctors']">Careers</a></div>
+      </div>
+    </div>
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+      <div class="footer-column">
+        <div class="footer-title">Partner</div>
+        <div><a class="nav-link" [routerLink]="['/find-doctors']">Register as Doctor</a></div>
+        <div><a class="nav-link" [routerLink]="['/find-doctors']">Register as Patient</a></div>
+      </div>
+    </div>
+  </div>
+</div>
