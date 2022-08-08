@@ -55,8 +55,12 @@ async function update(req, res, next) {
         let updateUser = {};
         let updateDoctor = {};
         let updateAppointment = {};
-
         let updatedDoctor = null;
+
+        if (req.file && req.file.location) {
+            console.log('there is file uploaded: ', req.file.location);
+            avatarurl = req.file.location;
+        }
 
         if (fullname) {
             if (fullname.trim().length === 0) {
@@ -113,7 +117,7 @@ async function update(req, res, next) {
             await User.findOneAndUpdate({ username: username }, updateUser);
         }
         if (updateNeeded) {
-            updatedDoctor = await Doctor.findOneAndUpdate({ username: username }, updateDoctor);
+            updatedDoctor = await Doctor.findOneAndUpdate({ username: username }, updateDoctor, { new: true });
         }
         if (updateAppointmentNeeded) {
             const filters = { 'arrayFilters': [{ 'elm.doctor.username': username }], 'multi': true }

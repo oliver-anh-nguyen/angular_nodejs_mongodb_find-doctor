@@ -134,11 +134,7 @@ async function updateInfoPatient(req, res, next) {
                 'appointment.$[ele].patient.avatarurl': avatarurl}, filters
         );
 
-        res.status(StatusCodes.OK).json({
-            error: null,
-            message: `PATIENT: updated profile successfully!`,
-            data: updatedPatient
-        });
+        res.status(StatusCodes.OK).json(updatedPatient);
     } catch (err) {
         next(err);
     }
