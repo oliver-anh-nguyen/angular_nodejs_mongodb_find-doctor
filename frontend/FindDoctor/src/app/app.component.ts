@@ -48,6 +48,14 @@ export class AppComponent implements OnDestroy {
     return false
   }
 
+  isDoctor(): boolean {
+    const userState = this.userService.getUserState();
+    if (userState?.role === 'DOCTOR') {
+      return true
+    }
+    return false
+  }
+
   search() {
     if (this.isPatient()) {
       this.router.navigate(['/', 'find-doctors']);
@@ -58,12 +66,16 @@ export class AppComponent implements OnDestroy {
     if (this.isPatient()) {
       this.router.navigate(['/', 'profile-patient']);
     }
+    if (this.isDoctor()) {
+      this.router.navigate(['/', 'profile-doctor']);
+    }
   }
 
   appointments() {
     if (this.isPatient()) {
       this.router.navigate(['/', 'patient']);
-    } else {
+    }
+    if (this.isDoctor()) {
       this.router.navigate(['/', 'doctor']);
     }
   }

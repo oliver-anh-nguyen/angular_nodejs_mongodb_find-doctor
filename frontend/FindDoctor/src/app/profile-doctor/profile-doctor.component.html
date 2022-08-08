@@ -1,0 +1,99 @@
+<div class="content-view">
+  <div class="left">
+    <mat-card>
+      <div class="avatar">
+        <img mat-card-image [src]="avatarUrl">
+      </div>
+      <div class="avatar">
+        <mat-card-title>Username: {{doctor?.username}}</mat-card-title>
+      </div>
+      <div class="button-update">
+        <button mat-flat-button color="primary">Update Avatar</button>
+      </div>
+    </mat-card>
+  </div>
+  <div class="right">
+    <mat-card>
+      <mat-card-title class="update-title">Update Profile</mat-card-title>
+      <form class="edit-form">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Full Name</mat-label>
+          <ng-container>
+            <input matInput placeholder="Full Name" [(ngModel)]="fullname" name="fullname" [disabled]="!isEdit"
+                   value={{doctor?.fullname}}>
+          </ng-container>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Phone Number</mat-label>
+          <ng-container>
+            <input matInput placeholder="Phone Number" [(ngModel)]="phone" name="phone" value={{doctor?.phone}}
+                   [disabled]="!isEdit">
+          </ng-container>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Description</mat-label>
+          <ng-container>
+            <input matInput placeholder="Description" [(ngModel)]="desc" name="desc" value={{doctor?.description}}
+                   [disabled]="!isEdit">
+          </ng-container>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Specialty</mat-label>
+          <mat-select [(value)]="selectedSpecialty" [disabled]="!isEdit">
+            <mat-option *ngFor="let specialty of specialties" [value]="specialty.name">
+              {{specialty.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Degrees</mat-label>
+          <ng-container>
+            <input matInput placeholder="Degrees" [(ngModel)]="degrees" name="degrees" value={{doctor?.degrees}}
+                   [disabled]="!isEdit">
+          </ng-container>
+        </mat-form-field>
+        <table class="full-width">
+          <tr>
+            <td>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Address Street</mat-label>
+                <input matInput placeholder="Ex. 414 N B St" [(ngModel)]="street" name="street" value={{street}} [disabled]="!isEdit">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-label>City</mat-label>
+                <input matInput placeholder="Ex. Fairfield" [(ngModel)]="city" name="city" value={{city}} [disabled]="!isEdit">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+        <table class="full-width">
+          <tr>
+            <td>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-label>State</mat-label>
+                <input matInput placeholder="Ex. Iowa" [(ngModel)]="state" name="state" value={{state}} [disabled]="!isEdit">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Zip Code</mat-label>
+                <input matInput #postalCode maxlength="5" placeholder="Ex. 52556" [(ngModel)]="zipcode" name="zipcode" value={{zipcode}} [disabled]="!isEdit">
+                <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+        <div class="avatar">
+          <ng-container *ngIf="!isEdit">
+            <button mat-flat-button color="primary" (click)="edit()">Edit</button>
+          </ng-container>
+          <ng-container *ngIf="isEdit">
+            <button mat-flat-button color="warn" (click)="save()">Save</button>
+          </ng-container>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+.content-view {
+  margin:20px;
+  /*background-color: rgba(0, 0, 255, .5);*/
+  display: flex;
+}
+
+.left {
+  min-width: 300px;
+  width: 25%;
+  margin:20px;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right {
+  width: 70%;
+  margin:20px;
+}
+
+.mat-card-image {
+  padding: 50px;
+  width: 200px;
+  height: 200px;
+  clip-path: circle(100px at center);
+}
+
+.edit-form {
+  /*min-width: 500px;*/
+  /*max-width: 500px;*/
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.update-title {
+  padding-top: 0px;
+  margin-bottom: 20px;
+}
+
+.mat-card {
+  min-height: 600px;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline,
+.mat-input-element:disabled {
+  color: grey;
+}
+
+.button-update {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
