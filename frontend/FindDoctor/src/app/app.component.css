@@ -26,7 +26,9 @@
 }
 
 .footer {
-  height: 170px;
+  margin-top: auto;
+  background-color: lightblue;
+  width: 100%;
 }
 
 .footer-column {
@@ -76,6 +78,5 @@ mat-progress-spinner {
 
 .nav-link {
   font-weight: lighter;
-  color: white;
   font-size: 15px;
 }
