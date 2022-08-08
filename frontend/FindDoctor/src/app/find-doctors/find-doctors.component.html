@@ -72,8 +72,8 @@
         <div class="detail-top-content">
             <div class="top-left-content">
                 <div class="detail-image">
-                  <img mat-card-image *ngIf="detailDoctor?.avatarurl" [src]="detailDoctor?.avatarurl">
-                  <img mat-card-image *ngIf="!detailDoctor?.avatarurl" [src]="defaultImageUrl">
+                    <img mat-card-image *ngIf="detailDoctor?.avatarurl" [src]="detailDoctor?.avatarurl">
+                    <img mat-card-image *ngIf="!detailDoctor?.avatarurl" [src]="defaultImageUrl">
                 </div>
                 <div>
                     <div>
@@ -123,10 +123,15 @@
             </div>
             <div class="detail-location">
                 <p class="location-title">Office Location</p>
-                <p>
-                    {{detailDoctor?.location?.street}}, {{detailDoctor?.location?.city}},
-                    {{detailDoctor?.location?.state}} {{detailDoctor?.location?.zipcode}}
-                </p>
+                <div fxLayout="row wrap" fxLayoutGap="16px grid">
+                    <div fxFlex="50%" fxFlex.xs="100%">
+                        <img src="../../assets/images/map.PNG" alt="Doctor Office Location">
+                    </div>
+                    <div class="detail-location-text">
+                        <p>{{detailDoctor?.location?.street}}</p>
+                        <p>{{detailDoctor?.location?.city}}, {{detailDoctor?.location?.state}} {{detailDoctor?.location?.zipcode}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </mat-card>

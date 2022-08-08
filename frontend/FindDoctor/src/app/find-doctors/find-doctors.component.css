@@ -117,4 +117,10 @@
   height: 200px;
 }
 
+.detail-location img {
+    width: 100%;
+}
 
+.detail-location-text {
+    margin-top: 50px;
+}
