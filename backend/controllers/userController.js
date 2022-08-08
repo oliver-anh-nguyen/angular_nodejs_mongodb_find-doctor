@@ -8,22 +8,23 @@ const SECRET = process.env.SECRET;
 
 async function login(req, res, next) {
     try {
-        const {username, password} = req.body;
+        const { username, password } = req.body;
         const userDb = await userModel.findOne({ username });
         if (!userDb) {
-            next(`LOGIN: username ${username} does not exist!`);
+            return res.status(StatusCodes.NO_CONTENT).json({ 'error': `LOGIN: username ${username} does not exist!` });
         }
         if (userDb.password === password) {
-            let infoUser = {username: userDb.username,
-                            role: userDb.role,
-                            fullname: userDb.fullname,
-                            avatarurl: userDb.avatarurl
+            let infoUser = {
+                username: userDb.username,
+                role: userDb.role,
+                fullname: userDb.fullname,
+                avatarurl: userDb.avatarurl
             };
             console.log(infoUser);
-            const token = jwt.sign( infoUser, SECRET);
-            res.status(StatusCodes.OK).json({token});
+            const token = jwt.sign(infoUser, SECRET);
+            res.status(StatusCodes.OK).json({ token });
         } else {
-            next(`LOGIN: password incorrect!`);
+            return res.status(StatusCodes.UNAUTHORIZED).json({ 'error': `LOGIN: password incorrect!` });
         }
     } catch (err) {
         next(`LOGIN: ${err}`);
@@ -39,13 +40,13 @@ async function signup(req, res, next) {
 
         if (req.body.role === 'PATIENT') {
             // create new patient
-            let patientInput = {username: req.body.username, fullname: req.body.fullname, avatarurl: req.body.avatarurl};
+            let patientInput = { username: req.body.username, fullname: req.body.fullname, avatarurl: req.body.avatarurl };
             let patient = new patientModel(patientInput);
             let newPatient = await patient.save();
             res.status(StatusCodes.CREATED).json(newPatient);
         } else if (req.body.role === 'DOCTOR') {
             // create new doctor
-            let doctorInput = {username: req.body.username, fullname: req.body.fullname, avatarurl: req.body.avatarurl};
+            let doctorInput = { username: req.body.username, fullname: req.body.fullname, avatarurl: req.body.avatarurl };
             let doctor = new doctorModel(doctorInput);
             let newDoctor = await doctor.save();
             res.status(StatusCodes.CREATED).json(newDoctor);
