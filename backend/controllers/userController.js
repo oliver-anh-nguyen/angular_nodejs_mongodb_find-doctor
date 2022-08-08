@@ -54,7 +54,8 @@ async function signup(req, res, next) {
             res.status(StatusCodes.CREATED).json(newUser);
         }
     } catch (err) {
-        next(`SIGNUP: ${err}`);
+        console.log(`SIGNUP: ${err}`)
+        next(`Something went wrong! Try again later!`);
     }
 }
 

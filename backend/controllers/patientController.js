@@ -2,7 +2,6 @@ const patientModel = require('../models/patientModel');
 const doctorModel = require('../models/doctorModel');
 const userModel = require('../models/userModel');
 const StatusCodes = require('../utils/StatusCodes');
-const Patient = require("../models/patientModel");
 
 async function getPatientById(req, res, next) {
     try {
@@ -93,7 +92,7 @@ async function cancelAppointment(req, res, next) {
         }, {
             $set: {'appointment.$.status': 'CANCELLED'}
         });
-        res.status(StatusCodes.OK).json(`PATIENT: cancel appointment successfully!`);
+        res.status(StatusCodes.OK).json(`Cancelled appointment successfully!`);
     } catch (err) {
         next(err);
     }

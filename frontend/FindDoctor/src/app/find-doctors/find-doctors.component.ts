@@ -5,6 +5,7 @@ import { UserService } from '../login/user.service';
 import { Doctor } from './DoctorInterface';
 import { FindDoctorsService } from './find-doctors.service';
 import { Specialty } from './SpecialtyInterface';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-find-doctors',
@@ -39,7 +40,7 @@ export class FindDoctorsComponent implements OnInit {
 
   commonSearches: Array<String>
 
-  constructor(private fb: FormBuilder, private findDoctorService: FindDoctorsService, private userService: UserService) {
+  constructor(private fb: FormBuilder, private findDoctorService: FindDoctorsService, private userService: UserService, private router: Router) {
 
     this.specialties = [
     ]
@@ -166,10 +167,11 @@ export class FindDoctorsComponent implements OnInit {
     console.log(this.dateControl.get)
     let cur = moment(new Date());
     if (this.selectedTime < cur) {
-      console.log('Select passed date'); // TODO: show error
+      console.log('book: Select passed date'); // TODO: show error
+      alert(`Can't select passed date! Try another date!`);
       return;
     } else {
-      console.log('Correct date');
+      console.log('book: Correct date');
     }
     console.log(this.userService.getUserState()?.username)
     let patient = this.userService.getUserState()?.username;
@@ -182,7 +184,11 @@ export class FindDoctorsComponent implements OnInit {
     }
     let selectedTime = this.selectedTime.format('YYYY-MM-DDTHH:mm:ss');
     this.findDoctorService.book(patient, doctor, selectedTime).subscribe((val) => {
-      console.log(val);
+      alert('Booking appointment successfully!');
+      this.router.navigate(['/', 'patient']);
+    }, err => {
+      console.log(err);
+      alert("Something went wrong! Try again later!");
     });
   }
 
