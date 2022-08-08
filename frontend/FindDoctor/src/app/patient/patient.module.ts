@@ -10,11 +10,13 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { ValidPhonePipe } from './valid-phone.pipe';
 
 
 @NgModule({
   declarations: [
-    PatientComponent
+    PatientComponent,
+    ValidPhonePipe
   ],
   imports: [
     CommonModule,

@@ -29,8 +29,7 @@
           </div>
         </mat-card-header>
         <mat-card-content>
-          <p class="phone" *ngIf="item.doctor.phone">Phone: +1 ({{item.doctor.phone | slice:0:3}}
-            ) {{item.doctor.phone | slice:3:6}}-{{item.doctor.phone | slice:6:10}}</p>
+          <p class="phone" *ngIf="item.doctor.phone">{{item.doctor.phone | validPhone }}</p>
           <p class="location" *ngIf="item.location">Location: {{item.location.street}}, {{item.location.city}}
             , {{item.location.state}}, {{item.location.zipcode}}</p>
           <div class="line-bottom">
