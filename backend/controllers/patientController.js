@@ -101,14 +101,22 @@ async function cancelAppointment(req, res, next) {
 async function updateInfoPatient(req, res, next) {
     try {
         const {username} = req.params;
-        const {fullname, avatarurl, phone } = req.body;
+        const {fullname, phone } = req.body;
+        let { avatarurl } = req.body;
+
+        console.log(username, fullname, avatarurl);
+
+        if (req.file.location) {
+            console.log('there is file uploaded: ', req.file.location);
+            avatarurl = req.file.location;
+        } else {
+            console.log('no file uploaded');
+        }
 
         // update info patient
-        await patientModel.updateOne({
-            'username': username
-        }, {
-            $set: {'fullname': fullname, 'avatarurl': avatarurl, 'phone': phone}
-        })
+        let updatedPatient = await patientModel.findOneAndUpdate({ 'username': username },
+            { $set: { 'fullname': fullname, 'avatarurl': avatarurl, 'phone': phone } },
+            { new: true });
 
         // update info user
         await userModel.updateOne({
@@ -124,7 +132,11 @@ async function updateInfoPatient(req, res, next) {
                 'appointment.$.patient.avatarurl': avatarurl}
         );
 
-        res.status(StatusCodes.OK).json(`PATIENT: update profile successfully!`);
+        res.status(StatusCodes.OK).json({
+            error: null,
+            message: `PATIENT: updated profile successfully!`,
+            data: updatedPatient
+        });
     } catch (err) {
         next(err);
     }
