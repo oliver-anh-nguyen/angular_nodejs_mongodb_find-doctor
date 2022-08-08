@@ -17,6 +17,7 @@ export class UserService {
   }
 
   getUserState(): User | null {
+    if (!this.userState$ || !this.userState$.value) return null;
     const decoded = this.userState$.value.token && jwtDecode(this.userState$.value.token) as User;
     return decoded || null;
   }

@@ -17,7 +17,7 @@ export class AppComponent implements OnDestroy {
   constructor(private userService: UserService, private router: Router) {
     this.sub = this.userService.userState$.subscribe(userState => {
       console.log(userState)
-      if (userState.token) {
+      if (userState && userState.token) {
         this.isLoggedIn = true
         this.username = this.userService.getUserState()?.fullname as string;
         this.avatarUrl = this.userService.getUserState()?.avatarurl as string;
