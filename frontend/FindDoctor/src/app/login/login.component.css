@@ -1,8 +1,12 @@
+.body-page {
+  padding-top: 100px;
+  background-color: rgb(224, 243, 250);
+}
+
 .ng-star-inserted {
   width: 100%;
 }
 .mat-card {
-  margin-top: 100px;
   width: 300px;
   display: block;
   margin-left:auto;

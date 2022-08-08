@@ -9,7 +9,7 @@
 .search-container {
   margin-left: 50px;
   margin-right: 50px;
-  padding-top: 100px;
+  padding-top: 50px;
 }
 
 .header {
@@ -25,9 +25,9 @@
 }
 
 .doctor-list {
-  background-color: gainsboro;
   margin-left: 50px;
   margin-right: 50px;
+  padding-bottom: 50px;
 }
 
 .common-search-label, .doctor-list-label {
@@ -38,8 +38,9 @@
 }
 
 .doctor-detail {
-  background-color: blanchedalmond;
-  min-width: 400;
+  min-width: 400px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .profile-image {
@@ -53,7 +54,6 @@
 
 .mat-card {
   min-width: 200px;
-  margin-bottom: 20px;
 }
 
 .mat-toolbar {
@@ -71,6 +71,7 @@
 }
 
 .common-search-image {
+  padding-top: 10px;
   width: calc(100% - 40px);
   margin: 24px -16px 16px 16px;
 }
@@ -99,7 +100,7 @@
 }
 
 .detail-main-content {
-  margin: 20px;
+  margin-top: 20px;
 }
 
 .degrees-title,
@@ -107,3 +108,13 @@
 .location-title {
   font-weight: bold;
 }
+
+.header-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 200px;
+}
+
+

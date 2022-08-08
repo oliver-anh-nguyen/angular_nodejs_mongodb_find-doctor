@@ -52,7 +52,8 @@
                     <mat-card-header>
                         <mat-card-title>{{doctor.fullname}}</mat-card-title>
                     </mat-card-header>
-                    <img mat-card-image [src]="defaultImageUrl" alt="doctor.fullname">
+                    <img mat-card-image *ngIf="doctor.avatarurl" [src]="doctor.avatarurl" class="header-image">
+                    <img mat-card-image *ngIf="!doctor.avatarurl" [src]="defaultImageUrl" class="header-image">
                     <mat-card-content>
                         <p>
                             {{doctor.location.street}}, {{doctor.location.city}},
@@ -67,11 +68,12 @@
             </div>
         </div>
     </div>
-    <div *ngIf="!doctorListShown" class="doctor-detail">
+    <mat-card *ngIf="!doctorListShown" class="doctor-detail">
         <div class="detail-top-content">
             <div class="top-left-content">
                 <div class="detail-image">
-                    <img mat-card-image [src]="defaultImageUrl" alt="doctor.fullname">
+                  <img mat-card-image *ngIf="detailDoctor?.avatarurl" [src]="detailDoctor?.avatarurl">
+                  <img mat-card-image *ngIf="!detailDoctor?.avatarurl" [src]="defaultImageUrl">
                 </div>
                 <div>
                     <div>
@@ -92,7 +94,7 @@
                 </button>
             </div>
         </div>
-        <mat-divider></mat-divider>
+
         <div class="detail-book">
             <div class="book-datetime-picker">
                 <mat-form-field>
@@ -107,7 +109,7 @@
             </div>
             <button mat-flat-button (click)="book()" color="primary">Book</button>
         </div>
-        <mat-divider></mat-divider>
+
         <div class="detail-main-content">
             <div class="detail-degrees">
                 <p class="degrees-title">Dr. {{detailDoctor?.fullname}}'s Degree</p>
@@ -127,5 +129,5 @@
                 </p>
             </div>
         </div>
-    </div>
+    </mat-card>
 </div>

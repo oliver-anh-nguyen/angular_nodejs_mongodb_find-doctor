@@ -1,5 +1,5 @@
 .content-view {
-  margin:20px;
+  padding:20px;
   /*background-color: rgba(0, 0, 255, .5);*/
   display: flex;
 }
@@ -11,6 +11,7 @@
 }
 
 .avatar {
+  padding-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,6 +42,7 @@
 .update-title {
   padding-top: 10px;
   margin-bottom: 50px;
+  color: rgb(40, 57, 133);
 }
 
 .mat-card {

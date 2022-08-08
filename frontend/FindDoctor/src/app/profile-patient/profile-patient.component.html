@@ -5,7 +5,7 @@
         <img mat-card-image [src]="avatarUrl">
       </div>
       <div class="avatar">
-        <mat-card-title>Username: {{patient?.username}}</mat-card-title>
+        <mat-card-title style="color: rgb(40, 57, 133);">Username: {{patient?.username}}</mat-card-title>
       </div>
       <div class="avatar">
         <input *ngIf="isAvatarEditing" type="file" accept="image/*" class="file-upload" color="primary" (change)="changeImage($event)">

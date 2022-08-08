@@ -2,7 +2,7 @@ export interface Doctor {
     username: String,
     fullname: String,
     phone: String,
-    avatarUrl: String,
+    avatarurl: String,
     specialty: String,
     description: String,
     degrees: Array<String>,
