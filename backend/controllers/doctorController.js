@@ -83,6 +83,7 @@ async function update(req, res, next) {
             if (!(await checking.isValidSpecialty(specialty))) {
                 return res.status(StatusCodes.BAD_REQUEST).json({ "error": "Invalid specialty" });
             }
+            updateNeeded = true;
             updateUserNeeded = true;
             updateAppointmentNeeded = true;
             updateUser['specialty'] = specialty;
@@ -106,7 +107,7 @@ async function update(req, res, next) {
             updateAppointment['appointment.$[elm].location'] = location;
         }
         if (!updateNeeded) {
-            return res.status(StatusCodes.BAD_REQUEST({ "error": "No data provided for update" }));
+            return res.status(StatusCodes.BAD_REQUEST).json({ "error": "No data provided for update" });
         }
         if (updateUserNeeded) {
             await User.findOneAndUpdate({ username: username }, updateUser);
