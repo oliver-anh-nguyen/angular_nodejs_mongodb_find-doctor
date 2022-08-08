@@ -11,7 +11,7 @@ async function login(req, res, next) {
         const { username, password } = req.body;
         const userDb = await userModel.findOne({ username });
         if (!userDb) {
-            return res.status(StatusCodes.NO_CONTENT).json({ 'error': `LOGIN: username ${username} does not exist!` });
+            return res.status(StatusCodes.UNAUTHORIZED).json({ 'error': `Username ${username} does not exist!` });
         }
         if (userDb.password === password) {
             let infoUser = {
@@ -24,7 +24,7 @@ async function login(req, res, next) {
             const token = jwt.sign(infoUser, SECRET);
             res.status(StatusCodes.OK).json({ token });
         } else {
-            return res.status(StatusCodes.UNAUTHORIZED).json({ 'error': `LOGIN: password incorrect!` });
+            return res.status(StatusCodes.UNAUTHORIZED).json({ 'error': `Password incorrect!` });
         }
     } catch (err) {
         next(`LOGIN: ${err}`);

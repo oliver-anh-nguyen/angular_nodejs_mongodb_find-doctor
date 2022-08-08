@@ -20,9 +20,11 @@ export class LoginComponent {
   }
 
   login(): void {
-    console.log("login userService");
-    console.log(this.loginForm.value.username);
-    console.log(this.loginForm.value.password);
+    if (!this.loginForm.valid) {
+      console.log("login invalid");
+      return
+    }
+    console.log("login valid");
     this.userService.login(this.loginForm.value.username, this.loginForm.value.password)
       .subscribe(res => {
         console.log(res);
@@ -35,7 +37,10 @@ export class LoginComponent {
         } else {
           this.router.navigate(['/', 'doctor'])
         }
-      });
+      }, err => {
+        console.log(err.error.error);
+        alert(err.error.error ? err.error.error : "Something went wrong! Try again later!");
+    });
   }
 
 }

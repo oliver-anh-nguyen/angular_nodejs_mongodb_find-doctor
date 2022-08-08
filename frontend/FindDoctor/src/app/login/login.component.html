@@ -5,12 +5,14 @@
       <form [formGroup]="loginForm" (ngSubmit)="login()">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Username" formControlName="username">
+          <input matInput placeholder="Username" required formControlName="username">
+          <mat-error>Username is required!</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Password" formControlName="password">
+          <input matInput type="password" required placeholder="Password" formControlName="password">
+          <mat-error>Password is required!</mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit">Login</button>
       </form>
