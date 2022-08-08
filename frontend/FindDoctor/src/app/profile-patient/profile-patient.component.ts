@@ -3,7 +3,7 @@ import {AppointmentPatient} from "../patient/AppointmentPatient";
 import {ProfilePatient} from "./ProfilePatient";
 import {ProfileService} from "../common/profile.service";
 import {UserService} from "../login/user.service";
-import { UploadFileService } from './upload-file.service';
+import { UploadFileService } from '../common/upload-file.service';
 
 @Component({
   selector: 'app-profile-patient',
@@ -66,9 +66,13 @@ export class ProfilePatientComponent implements OnInit {
     if (this.file) {
       console.log('going to upload file: ', this.file);
       const user = this.userService.getUserState();
-      this.uploadFileService.uploadUserProfile(user, this.file).subscribe(result => {
-        console.log(result);
+      this.uploadFileService.uploadPatientAvatar(user, this.file).subscribe(profile => {
+        console.log(profile);
         this.isAvatarEditing = false;
+        this.patient = profile;
+        this.avatarUrl = this.patient.avatarurl;
+        this.phone = this.patient.phone;
+        this.fullname = this.patient.fullname;
       });
     } else {
       console.log('There is no selected file');
