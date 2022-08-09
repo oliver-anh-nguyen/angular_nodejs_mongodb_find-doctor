@@ -74,6 +74,12 @@
     0px 1px 10px 0px cornflowerblue;
 }
 
+.detail-card:hover {
+  cursor: pointer;
+  box-shadow: 0px 2px 4px -1px cornflowerblue, 0px 4px 5px 0px cornflowerblue,
+  0px 1px 10px 0px cornflowerblue;
+}
+
 .common-search-image {
   padding-top: 10px;
   width: calc(100% - 40px);
