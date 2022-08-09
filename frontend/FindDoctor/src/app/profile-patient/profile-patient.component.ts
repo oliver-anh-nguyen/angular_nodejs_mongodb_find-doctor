@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AppointmentPatient} from "../patient/AppointmentPatient";
 import {ProfilePatient} from "./ProfilePatient";
-import {ProfilePatientService} from "./profile-patient.service";
+import {ProfileService} from "../common/profile.service";
 import {UserService} from "../login/user.service";
-import { UploadFileService } from './upload-file.service';
+import { UploadFileService } from '../common/upload-file.service';
 
 @Component({
   selector: 'app-profile-patient',
@@ -19,14 +19,14 @@ export class ProfilePatientComponent implements OnInit {
   isAvatarEditing: boolean = false;
   file: File | null = null;
 
-  constructor(private profileService: ProfilePatientService, private userService: UserService, private uploadFileService: UploadFileService) {
+  constructor(private profileService: ProfileService, private userService: UserService, private uploadFileService: UploadFileService) {
     this.getInfoPatient()
   }
 
   getInfoPatient() {
     let username = this.userService.getUserState()?.username;
     if (username) {
-      this.profileService.getInfo(username).subscribe(profile => {
+      this.profileService.getPatientInfo(username).subscribe(profile => {
         console.log(profile);
         this.patient = profile;
         this.avatarUrl = this.patient.avatarurl;
@@ -47,7 +47,7 @@ export class ProfilePatientComponent implements OnInit {
     this.isEdit = false;
     let username = this.userService.getUserState()?.username;
     if (username) {
-      this.profileService.updateInfo(username, this.fullname, this.avatarUrl, this.phone).subscribe(data => {
+      this.profileService.updatePatientInfo(username, this.fullname, this.avatarUrl, this.phone).subscribe(data => {
         console.log(data);
         alert("Update Successfully!");
       })
@@ -66,9 +66,13 @@ export class ProfilePatientComponent implements OnInit {
     if (this.file) {
       console.log('going to upload file: ', this.file);
       const user = this.userService.getUserState();
-      this.uploadFileService.uploadUserProfile(user, this.file).subscribe(result => {
-        console.log(result);
+      this.uploadFileService.uploadPatientAvatar(user, this.file).subscribe(profile => {
+        console.log(profile);
         this.isAvatarEditing = false;
+        this.patient = profile;
+        this.avatarUrl = this.patient.avatarurl;
+        this.phone = this.patient.phone;
+        this.fullname = this.patient.fullname;
       });
     } else {
       console.log('There is no selected file');

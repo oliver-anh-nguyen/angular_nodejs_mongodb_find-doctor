@@ -106,7 +106,7 @@ async function updateInfoPatient(req, res, next) {
 
         console.log(username, fullname, avatarurl);
 
-        if (req.file.location) {
+        if (req.file && req.file.location) {
             console.log('there is file uploaded: ', req.file.location);
             avatarurl = req.file.location;
         } else {
@@ -133,11 +133,7 @@ async function updateInfoPatient(req, res, next) {
                 'appointment.$[ele].patient.avatarurl': avatarurl}, filters
         );
 
-        res.status(StatusCodes.OK).json({
-            error: null,
-            message: `PATIENT: updated profile successfully!`,
-            data: updatedPatient
-        });
+        res.status(StatusCodes.OK).json(updatedPatient);
     } catch (err) {
         next(err);
     }

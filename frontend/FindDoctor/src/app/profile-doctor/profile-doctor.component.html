@@ -7,8 +7,10 @@
       <div class="avatar">
         <mat-card-title style="color: rgb(40, 57, 133);">Username: {{doctor?.username}}</mat-card-title>
       </div>
-      <div class="button-update">
-        <button mat-flat-button color="primary">Update Avatar</button>
+      <div class="avatar">
+      <input *ngIf="isAvatarEditing" type="file" accept="image/*" class="file-upload" color="primary" (change)="changeImage($event)">
+        <button *ngIf="isAvatarEditing" mat-flat-button color="primary" (click)="uploadAvatar()">Update Avatar</button>
+        <button *ngIf="!isAvatarEditing" mat-flat-button color="primary" (click)="editAvatar()">Change Avatar</button>
       </div>
     </mat-card>
   </div>
