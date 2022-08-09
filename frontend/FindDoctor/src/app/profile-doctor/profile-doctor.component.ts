@@ -144,7 +144,9 @@ export class ProfileDoctorComponent implements OnInit {
         console.log(profile);
         this.isAvatarEditing = false;
         this.doctor = profile;
-        this.avatarUrl = this.doctor.avatarurl;
+        if (this.doctor.avatarurl) {
+          this.avatarUrl = this.doctor.avatarurl;
+        }
         this.phone = this.doctor.phone;
         this.fullname = this.doctor.fullname;
         this.desc = this.doctor.description;
@@ -154,6 +156,7 @@ export class ProfileDoctorComponent implements OnInit {
         this.city = this.doctor.location.city;
         this.state = this.doctor.location.state;
         this.zipcode = this.doctor.location.zipcode;
+        this.toast.success({detail: 'Success Message', summary:'Update avatar successfully!', duration: 5000});
       });
     } else {
       console.log('There is no selected file');

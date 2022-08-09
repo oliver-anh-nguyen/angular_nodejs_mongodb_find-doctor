@@ -80,7 +80,9 @@ export class ProfilePatientComponent implements OnInit {
         console.log(profile);
         this.isAvatarEditing = false;
         this.patient = profile;
-        this.avatarUrl = this.patient.avatarurl;
+        if (this.patient.avatarurl) {
+          this.avatarUrl = this.patient.avatarurl;
+        }
         this.phone = this.patient.phone;
         this.fullname = this.patient.fullname;
         this.toast.success({detail: 'Success Message', summary:'Update avatar successfully!', duration: 5000});
