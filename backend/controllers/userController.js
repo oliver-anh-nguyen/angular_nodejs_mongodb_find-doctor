@@ -3,6 +3,8 @@ const StatusCodes = require('../utils/StatusCodes');
 const userModel = require('../models/userModel');
 const doctorModel = require("../models/doctorModel");
 const patientModel = require("../models/patientModel");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const SECRET = process.env.SECRET;
 
@@ -13,19 +15,23 @@ async function login(req, res, next) {
         if (!userDb) {
             return res.status(StatusCodes.UNAUTHORIZED).json({ 'error': `Username ${username} does not exist!` });
         }
-        if (userDb.password === password) {
-            let infoUser = {
-                username: userDb.username,
-                role: userDb.role,
-                fullname: userDb.fullname,
-                avatarurl: userDb.avatarurl
-            };
-            console.log(infoUser);
-            const token = jwt.sign(infoUser, SECRET, { expiresIn: '1h' });
-            res.status(StatusCodes.OK).json({ token });
-        } else {
-            return res.status(StatusCodes.UNAUTHORIZED).json({ 'error': `Password incorrect!` });
-        }
+        bcrypt.compare(password, userDb.password, function(err, isMatch) {
+            // if isMatch == true, password matched
+            // else wrong password
+            if (isMatch) {
+                let infoUser = {
+                    username: userDb.username,
+                    role: userDb.role,
+                    fullname: userDb.fullname,
+                    avatarurl: userDb.avatarurl
+                };
+                console.log(infoUser);
+                const token = jwt.sign(infoUser, SECRET, { expiresIn: '1h' });
+                res.status(StatusCodes.OK).json({ token });
+            } else {
+                return res.status(StatusCodes.UNAUTHORIZED).json({ 'error': `Password incorrect!` });
+            }
+        });
     } catch (err) {
         next(`LOGIN: ${err}`);
     }
@@ -45,8 +51,12 @@ async function signup(req, res, next) {
             return
         }
         let userInput = req.body;
-        let user = new userModel(userInput);
-        let newUser = await user.save();
+        await bcrypt.hash(userInput.password, saltRounds, (err, hash) => {
+            console.log(hash);
+            userInput.password = hash;
+            let user = new userModel(userInput);
+            user.save();
+        });
 
         if (req.body.role === 'PATIENT') {
             // create new patient
