@@ -32,7 +32,7 @@ app.use(morgan('combined'));
 app.use('/patients', checkToken, patientRouter);
 app.use('/users', userRouter);
 app.use('/doctors', checkToken, doctorRouter);
-app.use('/specialties', specialtyRouter);
+app.use('/specialties', checkToken, specialtyRouter);
 
 // Error handling
 app.use((err, req, res, next) => {
