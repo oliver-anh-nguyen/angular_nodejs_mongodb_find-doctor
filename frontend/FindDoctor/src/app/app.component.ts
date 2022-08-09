@@ -16,7 +16,8 @@ export class AppComponent implements OnDestroy {
   username: string = '';
   DEFAULT_AVATAR_URL = 'assets/images/default_avatar.jpeg';
   avatarUrl = '';
-  constructor(private userService: UserService, private router: Router,
+  constructor(private userService: UserService,
+              private router: Router,
               public loader: LoadingService) {
     this.sub = this.userService.userState$.subscribe(userState => {
       console.log(userState)
@@ -36,6 +37,10 @@ export class AppComponent implements OnDestroy {
     this.userService.refreshState();
     const userState = this.userService.getUserState();
     if (!userState) {
+      if (window.location.href.includes('sign-up')) {
+        this.router.navigate(['/', 'sign-up']);
+        return
+      }
       this.router.navigate(['/', 'login']);
     }
   }
