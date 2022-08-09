@@ -64,6 +64,10 @@
   justify-content: space-between;
 }
 
+.common-search-card {
+    max-width: 200px;
+}
+
 .common-search-card:hover {
   cursor: pointer;
   box-shadow: 0px 2px 4px -1px cornflowerblue, 0px 4px 5px 0px cornflowerblue,
@@ -115,6 +119,7 @@
   margin-right: auto;
   width: 200px;
   height: 200px;
+  clip-path: circle(100px at center);
 }
 
 .detail-location img {
