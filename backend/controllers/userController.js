@@ -21,7 +21,7 @@ async function login(req, res, next) {
                 avatarurl: userDb.avatarurl
             };
             console.log(infoUser);
-            const token = jwt.sign(infoUser, SECRET);
+            const token = jwt.sign(infoUser, SECRET, { expiresIn: '1h' });
             res.status(StatusCodes.OK).json({ token });
         } else {
             return res.status(StatusCodes.UNAUTHORIZED).json({ 'error': `Password incorrect!` });
