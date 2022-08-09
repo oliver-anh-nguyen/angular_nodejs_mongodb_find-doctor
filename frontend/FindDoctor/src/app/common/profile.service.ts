@@ -16,7 +16,7 @@ export class ProfileService {
   }
 
   updatePatientInfo(username: string, fullname: string, avatar: string, phone: string) {
-    return this.http.patch(`${environment.baseUrl}patients/${username}/update`, {
+    return this.http.patch(`${environment.baseUrl}patients/${username}`, {
       fullname: fullname,
       avatarurl: avatar,
       phone: phone

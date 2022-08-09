@@ -8,6 +8,6 @@ router.get('/search', doctorController.search);
 router.get('/:username', doctorController.getByUsername);
 router.patch('/:username', uploader.single('avatar'), doctorController.update);
 router.get('/:username/appointments', doctorController.getAllAppointments);
-router.patch('/:username/appointment', doctorController.updateAppointment);
+router.patch('/:username/appointments', doctorController.updateAppointment);
 
 module.exports = router;

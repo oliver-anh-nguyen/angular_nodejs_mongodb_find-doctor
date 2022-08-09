@@ -5,8 +5,8 @@ const uploader = require('../middlewares/s3fileUploader');
 
 router.get('/:username/appointments', patientController.getAppointments);
 router.get('/:username', patientController.getPatientById);
-router.patch('/:username/update', uploader.single('avatar'), patientController.updateInfoPatient);
-router.post('/:username/appointment', patientController.bookAppointment);
-router.patch('/:username/appointment', patientController.cancelAppointment);
+router.patch('/:username', uploader.single('avatar'), patientController.updateInfoPatient);
+router.post('/:username/appointments', patientController.bookAppointment);
+router.patch('/:username/appointments', patientController.cancelAppointment);
 
 module.exports = router;

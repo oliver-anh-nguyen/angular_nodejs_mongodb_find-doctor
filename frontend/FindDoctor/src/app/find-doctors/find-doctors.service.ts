@@ -30,7 +30,7 @@ export class FindDoctorsService {
     }
 
     book(patient: String, doctor: String, time: String) {
-        let url = environment.baseUrl + 'patients/' + patient + '/' + 'appointment';
+        let url = environment.baseUrl + 'patients/' + patient + '/' + 'appointments';
         let body = {
             "doctorUsername": doctor,
             "time": time

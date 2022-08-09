@@ -15,7 +15,7 @@ export class PatientService {
   }
 
   cancelAppointment(username: string, doctor: string, time: number) {
-    return this.http.patch(`${environment.baseUrl}patients/${username}/appointment`, {
+    return this.http.patch(`${environment.baseUrl}patients/${username}/appointments`, {
       doctorUsername: doctor,
       time: time
     });
