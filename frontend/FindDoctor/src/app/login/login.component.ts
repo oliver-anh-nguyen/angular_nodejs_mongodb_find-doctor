@@ -33,7 +33,7 @@ export class LoginComponent {
         let state = this.userService.getUserState();
         console.log(`login() with role:  ${state?.role}`);
         if (state?.role === 'PATIENT') {
-          this.router.navigate(['/', 'patient'])
+          this.router.navigate(['/', 'find-doctors'])
         } else {
           this.router.navigate(['/', 'doctor'])
         }
