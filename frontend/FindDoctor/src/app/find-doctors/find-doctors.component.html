@@ -33,7 +33,7 @@
                     <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let search of commonSearches">
                         <mat-card class="mat-elevation-z4 common-search-card" (click)="searchCommonDoctors(search)">
                             <mat-card-content>
-                                <img mat-card-image class="common-search-image" src="../../assets/images/{{search}}.png"
+                                <img mat-card-image class="common-search-image" src="assets/images/{{search}}.png"
                                     alt="{{search}}">
                             </mat-card-content>
                             <mat-card-title class="common-search-title">{{search}}</mat-card-title>
@@ -125,7 +125,7 @@
                 <p class="location-title">Office Location</p>
                 <div fxLayout="row wrap" fxLayoutGap="16px grid">
                     <div fxFlex="50%" fxFlex.xs="100%">
-                        <img src="../../assets/images/map.PNG" alt="Doctor Office Location">
+                        <img src="assets/images/map.PNG" alt="Doctor Office Location">
                     </div>
                     <div class="detail-location-text">
                         <p>{{detailDoctor?.location?.street}}</p>
