@@ -45,7 +45,7 @@
     </div>
 
     <div *ngIf="doctorListShown" class="doctor-list">
-        <div class="doctor-list-label">List of {{searchedSpecialty}} Doctors</div>
+        <div class="doctor-list-label">List of {{searchedSpecialty}}</div>
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
             <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let doctor of doctors">
                 <mat-card class="mat-elevation-z4">

@@ -37,7 +37,7 @@ export class FindDoctorsComponent implements OnInit {
   stepSecond = 1;
   dateControl = new UntypedFormControl();
   selectedTime: moment.Moment = moment(new Date());
-  searchedSpecialty: String = "Dentist";
+  searchedSpecialty: String = "Veterinarian";
 
   commonSearches: Array<String>
 
@@ -102,7 +102,7 @@ export class FindDoctorsComponent implements OnInit {
       'Wyoming'
     ]
 
-    this.commonSearches = ['Dentist', 'Cardiologist', 'Gastroenterologist', 'Podiatrists', 'Pulmonologists'];
+    this.commonSearches = ['Veterinarian', 'Dentist', 'Cardiologist', 'Gastroenterologist', 'Podiatrists'];
 
     this.searchForm = fb.group({
       specialty: this.specialties[0],
@@ -148,7 +148,7 @@ export class FindDoctorsComponent implements OnInit {
     );
 
     // testing
-    this.findDoctorService.searchDoctors('dentist', this.selectedState).subscribe(
+    this.findDoctorService.searchDoctors('veterinarian', this.selectedState).subscribe(
       doctors => {
         console.log(doctors);
         this.doctors = doctors;
