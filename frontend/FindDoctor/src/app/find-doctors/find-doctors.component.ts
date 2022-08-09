@@ -6,6 +6,7 @@ import { Doctor } from './DoctorInterface';
 import { FindDoctorsService } from './find-doctors.service';
 import { Specialty } from './SpecialtyInterface';
 import {Router} from "@angular/router";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-find-doctors',
@@ -40,7 +41,11 @@ export class FindDoctorsComponent implements OnInit {
 
   commonSearches: Array<String>
 
-  constructor(private fb: FormBuilder, private findDoctorService: FindDoctorsService, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder,
+              private findDoctorService: FindDoctorsService,
+              private userService: UserService,
+              private router: Router,
+              private toast: NgToastService) {
 
     this.specialties = [
     ]
@@ -173,14 +178,14 @@ export class FindDoctorsComponent implements OnInit {
   bookFromMain() {
     // TODO: implement
   }
-  
+
   book() {
     console.log('Do book for doctor', this.detailDoctor);
     console.log(this.dateControl.get)
     let cur = moment(new Date());
     if (this.selectedTime < cur) {
       console.log('book: Select passed date'); // TODO: show error
-      alert(`Can't select passed date! Try another date!`);
+      this.toast.warning({detail: 'Warning Message', summary:`Can't select passed date!`, duration: 5000});
       return;
     } else {
       console.log('book: Correct date');
@@ -196,11 +201,11 @@ export class FindDoctorsComponent implements OnInit {
     }
     let selectedTime = this.selectedTime.format('YYYY-MM-DDTHH:mm:ss');
     this.findDoctorService.book(patient, doctor, selectedTime).subscribe((val) => {
-      alert('Booking appointment successfully!');
+      this.toast.success({detail: 'Success Message', summary:'Booking appointment successfully!', duration: 5000});
       this.router.navigate(['/', 'patient']);
     }, err => {
       console.log(err);
-      alert("Something went wrong! Try again later!");
+      this.toast.error({detail: 'Error Message', summary:"Something went wrong! Try again later!", duration: 5000});
     });
   }
 

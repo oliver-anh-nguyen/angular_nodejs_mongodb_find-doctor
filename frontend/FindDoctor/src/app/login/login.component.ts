@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UserService} from "./user.service";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,10 @@ export class LoginComponent {
 
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder,
+              private userService: UserService,
+              private router: Router,
+              private  toast: NgToastService) {
     this.loginForm = this.fb.group({
       username: ['pa1'],
       password: ['123']
@@ -39,7 +43,8 @@ export class LoginComponent {
         }
       }, err => {
         console.log(err.error.error);
-        alert(err.error.error ? err.error.error : "Something went wrong! Try again later!");
+        let messErr = err.error.error ? err.error.error : "Something went wrong! Try again later!";
+        this.toast.error({detail: 'Error Message', summary: messErr, duration:5000});
     });
   }
 

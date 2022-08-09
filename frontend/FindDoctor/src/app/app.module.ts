@@ -18,6 +18,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {NgToastModule} from "ng-angular-popup";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatMenuModule,
     MatIconModule,
     FlexLayoutModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgToastModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]

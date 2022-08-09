@@ -4,6 +4,7 @@ import {ProfilePatient} from "./ProfilePatient";
 import {ProfileService} from "../common/profile.service";
 import {UserService} from "../login/user.service";
 import { UploadFileService } from '../common/upload-file.service';
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-profile-patient',
@@ -19,7 +20,10 @@ export class ProfilePatientComponent implements OnInit {
   isAvatarEditing: boolean = false;
   file: File | null = null;
 
-  constructor(private profileService: ProfileService, private userService: UserService, private uploadFileService: UploadFileService) {
+  constructor(private profileService: ProfileService,
+              private userService: UserService,
+              private uploadFileService: UploadFileService,
+              private toast: NgToastService) {
     this.getInfoPatient()
   }
 
@@ -35,7 +39,7 @@ export class ProfilePatientComponent implements OnInit {
       })
     }
   }
-  
+
   ngOnInit(): void {
   }
 
@@ -49,7 +53,7 @@ export class ProfilePatientComponent implements OnInit {
     if (username) {
       this.profileService.updatePatientInfo(username, this.fullname, this.avatarUrl, this.phone).subscribe(data => {
         console.log(data);
-        alert("Update Successfully!");
+        this.toast.success({detail: 'Success Message', summary:'Update Successfully!', duration: 5000});
       })
     }
   }
@@ -76,7 +80,7 @@ export class ProfilePatientComponent implements OnInit {
       });
     } else {
       console.log('There is no selected file');
-      alert('There is no file selected.');
+      this.toast.error({detail: 'Error Message', summary:'There is no file selected!', duration: 5000});
     }
   }
 }

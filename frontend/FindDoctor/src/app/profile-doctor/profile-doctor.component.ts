@@ -5,6 +5,7 @@ import {Specialty} from "../find-doctors/SpecialtyInterface";
 import {FindDoctorsService} from "../find-doctors/find-doctors.service";
 import { ProfileService } from '../common/profile.service';
 import { UploadFileService } from '../common/upload-file.service';
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-profile-doctor',
@@ -29,8 +30,11 @@ export class ProfileDoctorComponent implements OnInit {
   isAvatarEditing: boolean = false;
   file: File | null = null;
 
-  constructor(private findDoctorService: FindDoctorsService, private profileService: ProfileService,
-    private userService: UserService, private uploadFileService: UploadFileService) {
+  constructor(private findDoctorService: FindDoctorsService,
+              private profileService: ProfileService,
+              private userService: UserService,
+              private uploadFileService: UploadFileService,
+              private toast: NgToastService) {
     this.specialties = [
     ]
     this.getInfoPatient()
@@ -116,7 +120,7 @@ export class ProfileDoctorComponent implements OnInit {
         this.city = this.doctor.location.city;
         this.state = this.doctor.location.state;
         this.zipcode = this.doctor.location.zipcode;
-        alert("Update Successfully!");
+        this.toast.success({detail: 'Success Message', summary:'Update Successfully!', duration: 5000});
       })
     }
   }
@@ -150,7 +154,7 @@ export class ProfileDoctorComponent implements OnInit {
       });
     } else {
       console.log('There is no selected file');
-      alert('There is no file selected.');
+      this.toast.error({detail: 'Error Message', summary:'There is no file selected!', duration: 5000});
     }
   }
 

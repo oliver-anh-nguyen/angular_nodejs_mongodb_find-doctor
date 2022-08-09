@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserService} from "../login/user.service";
 import {Router} from "@angular/router";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +12,10 @@ import {Router} from "@angular/router";
 export class SignUpComponent implements OnInit {
   signupForm!: FormGroup;
   role = 'Patient';
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder,
+              private userService: UserService,
+              private router: Router,
+              private toast: NgToastService) {
     this.signupForm = this.fb.group({
       username: [''],
       password: [''],
@@ -32,11 +36,12 @@ export class SignUpComponent implements OnInit {
     this.userService.signup(this.signupForm.value.username, this.signupForm.value.password, this.signupForm.value.fullname, this.signupForm.value.role)
       .subscribe(res => {
         console.log(res);
-        alert("SignUp successfully!")
+        this.toast.success({detail: 'Success Message', summary: "SignUp successfully!", duration: 5000});
         this.router.navigate(['/', 'login'])
       }, err => {
         console.log(err.error.error);
-        alert(err.error.error ? err.error.error : "Something went wrong! Try again later!");
+        let messErr = err.error.error ? err.error.error : "Something went wrong! Try again later!";
+        this.toast.error({detail: 'Error Message', summary: messErr, duration:5000});
       });
   }
 

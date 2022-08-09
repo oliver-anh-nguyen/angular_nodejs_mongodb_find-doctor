@@ -3,6 +3,7 @@ import {PatientService} from "./patient.service";
 import {UserService} from "../login/user.service";
 import {AppointmentPatient} from "./AppointmentPatient";
 import {Router} from "@angular/router";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-patient',
@@ -14,7 +15,10 @@ export class PatientComponent implements OnInit {
   public appointments:Array<AppointmentPatient>= [];
   gridColumns = 4;
 
-  constructor(private patientService: PatientService, private userService: UserService, private router: Router) {
+  constructor(private patientService: PatientService,
+              private userService: UserService,
+              private router: Router,
+              private toast: NgToastService) {
     this.getListAppointment();
   }
 
@@ -27,7 +31,7 @@ export class PatientComponent implements OnInit {
           this.appointments = data;
         },error => {
         console.log(`get appointments` + error);
-        alert("Something went wrong! Try again later!");
+          this.toast.error({detail: 'Error Message', summary: "Something went wrong! Try again later!", duration:5000});
       })
     }
   }
@@ -43,11 +47,12 @@ export class PatientComponent implements OnInit {
     let username = this.userService.getUserState()?.username;
     if (username) {
       this.patientService.cancelAppointment(username, usernameDoctor, time).subscribe(res => {
-        alert(res);
+        let mess = res as string
+        this.toast.success({detail: 'Success Message', summary: mess, duration:5000});
         this.getListAppointment();
       }, error => {
         console.log(`delete appointment` + error);
-        alert("Something went wrong! Try again later!");
+        this.toast.error({detail: 'Error Message', summary: "Something went wrong! Try again later!", duration:5000});
       })
     }
   }
