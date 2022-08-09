@@ -59,15 +59,6 @@ async function bookAppointment(req, res, next) {
                 'appointment': newAppointmentDoctor
             }
         });
-
-        // remove time appointment
-        await doctorModel.updateOne({
-            'username': doctorUsername,
-        }, {
-            $pull: {
-                'availableSlots': time
-            }
-        });
         res.status(StatusCodes.OK).json(`PATIENT: add appointment successfully!`);
     } catch (err) {
         next(err);

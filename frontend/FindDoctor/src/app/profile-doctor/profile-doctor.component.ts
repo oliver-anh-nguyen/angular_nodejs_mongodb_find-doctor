@@ -75,6 +75,7 @@ export class ProfileDoctorComponent implements OnInit {
   }
 
   save() {
+    console.log('save profile doctor');
     this.isEdit = false;
     let username = this.userService.getUserState()?.username;
     let data: any = {};
@@ -95,24 +96,22 @@ export class ProfileDoctorComponent implements OnInit {
         if (this.doctor.degrees != this.degrees) {
           data['degrees'] = this.degrees;
         }
-        if ((!this.doctor.location && this.street.length > 0) || this.doctor.location.street != this.street) {
-          data['location']['street'] = this.street;
-        }
-        if ((!this.doctor.location && this.city.length > 0) || this.doctor.location.city != this.city) {
-          data['location']['city'] = this.city;
-        }
-        if ((!this.doctor.location && this.state.length > 0) || this.doctor.location.state != this.state) {
-          data['location']['state'] = this.state;
-        }
-        if ((!this.doctor.location && this.zipcode.length > 0) || this.doctor.location.zipcode != this.zipcode) {
-          data['location']['zipcode'] = this.zipcode;
-        }
+
+        let location: any = {
+          street: this.street,
+          city: this.city,
+          state: this.state,
+          zipcode: this.zipcode
+        };
+        data['location'] = location;
         console.log(data);
       }
       this.profileService.updateDoctorInfo(username, data).subscribe(profile => {
         console.log(profile);
         this.doctor = profile as ProfileDoctor;
-        this.avatarUrl = this.doctor.avatarurl;
+        if (this.doctor.avatarurl) {
+          this.avatarUrl = this.doctor.avatarurl;
+        }
         this.phone = this.doctor.phone;
         this.fullname = this.doctor.fullname;
         this.desc = this.doctor.description;
@@ -123,6 +122,8 @@ export class ProfileDoctorComponent implements OnInit {
         this.state = this.doctor.location.state;
         this.zipcode = this.doctor.location.zipcode;
         this.toast.success({detail: 'Success Message', summary:'Update Successfully!', duration: 5000});
+      }, error => {
+        this.toast.error({detail: 'Error Message', summary: error.error.error, duration: 5000});
       })
     }
   }

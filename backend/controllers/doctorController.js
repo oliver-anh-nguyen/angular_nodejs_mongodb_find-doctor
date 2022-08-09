@@ -103,9 +103,7 @@ async function update(req, res, next) {
             updateDoctor['degrees'] = degrees;
         }
         if (location) {
-            if (!checking.isValidLocation(location)) {
-                return res.status(StatusCodes.BAD_REQUEST).json({ "error": "Invalid location" });
-            }
+            updateNeeded = true;
             updateAppointmentNeeded = true;
             updateDoctor['location'] = location;
             updateAppointment['appointment.$[elm].location'] = location;

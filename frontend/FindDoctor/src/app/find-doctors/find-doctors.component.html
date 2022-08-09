@@ -112,8 +112,7 @@
 
         <div class="detail-main-content">
             <div class="detail-degrees">
-                <p class="degrees-title">Dr. {{detailDoctor?.fullname}}'s Degree</p>
-                <p *ngIf="detailDoctor"><span *ngFor="let degree of detailDoctor?.degrees">{{degree}}</span></p>
+                <p class="degrees-title">Dr. {{detailDoctor?.fullname}}'s Degree : {{detailDoctor?.degrees}}</p>
             </div>
             <div class="detail-description">
                 <p class="description-title">About Dr. {{detailDoctor?.fullname}}</p>

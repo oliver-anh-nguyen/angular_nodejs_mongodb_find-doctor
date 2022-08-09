@@ -52,10 +52,14 @@ export class ProfilePatientComponent implements OnInit {
   save() {
     this.isEdit = false;
     let username = this.userService.getUserState()?.username;
+    if (this.patient?.fullname === this.fullname && this.patient?.phone === this.phone) {
+      this.toast.info({detail: "Info Message", summary: "Data no change. No need update!", duration: 5000});
+      return
+    }
     if (username) {
       this.profileService.updatePatientInfo(username, this.fullname, this.avatarUrl, this.phone).subscribe(data => {
         console.log(data);
-        this.toast.success({detail: 'Success Message', summary:'Update Successfully!', duration: 5000});
+        this.toast.success({detail: 'Success Message', summary:'Update successfully!', duration: 5000});
       })
     }
   }
@@ -79,6 +83,7 @@ export class ProfilePatientComponent implements OnInit {
         this.avatarUrl = this.patient.avatarurl;
         this.phone = this.patient.phone;
         this.fullname = this.patient.fullname;
+        this.toast.success({detail: 'Success Message', summary:'Update avatar successfully!', duration: 5000});
       });
     } else {
       console.log('There is no selected file');

@@ -7,7 +7,7 @@ const DoctorSchema = new mongoose.Schema({
     avatarurl: String,
     specialty: String,
     description: String,
-    degrees: Array,
+    degrees: String,
     location: {
         street: String,
         city: String,
@@ -23,8 +23,7 @@ const DoctorSchema = new mongoose.Schema({
         },
         time: Date,
         status: { type: String, default: 'BOOKING' } // BOOKING, CONFIRMED, CANCELLED, COMPLETED, MISSED
-    }],
-    availableSlots: Array
+    }]
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);

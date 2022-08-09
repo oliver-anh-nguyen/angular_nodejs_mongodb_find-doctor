@@ -5,7 +5,7 @@ export interface Doctor {
     avatarurl: String,
     specialty: String,
     description: String,
-    degrees: Array<String>,
+    degrees: String,
     location: {
         street: String,
         city: String,
@@ -17,8 +17,5 @@ export interface Doctor {
         phone: String,
         time: Date,
         status: String
-    }],
-    availableSlots: [{
-        type: Date
     }]
 }
