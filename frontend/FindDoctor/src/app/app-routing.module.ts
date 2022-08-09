@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () => import('./profile-doctor/profile-doctor.module').then(m => m.ProfileDoctorModule),
     canActivate: [CheckTokenGuard]
   },
+  {
+    path: 'sign-up',
+    loadChildren: () => import('./sign-up/sign-up.module').then(m => m.SignUpModule)
+  },
   { path: '**', redirectTo: 'login' }
 ];
 

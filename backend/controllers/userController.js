@@ -34,6 +34,16 @@ async function login(req, res, next) {
 async function signup(req, res, next) {
     try {
         // create new user
+        const {username, role} = req.body;
+        const userDb = await userModel.findOne({ username });
+        if (userDb) {
+            res.status(StatusCodes.UNAUTHORIZED).json({'error': `Username ${username} existed! Try another one!`});
+            return
+        }
+        if (role !== 'PATIENT' && role !== 'DOCTOR') {
+            res.status(StatusCodes.UNAUTHORIZED).json({'error': `Wrong Role!`});
+            return
+        }
         let userInput = req.body;
         let user = new userModel(userInput);
         let newUser = await user.save();

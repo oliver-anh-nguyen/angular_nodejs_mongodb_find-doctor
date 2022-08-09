@@ -17,6 +17,18 @@ export class UserService {
     return this.http.post<{token: string}>(`${environment.baseUrl}users/login`, {username, password});
   }
 
+  signup(username: string, password: string, fullname: string, role: string) {
+    console.log(username, password, fullname, role);
+    let roleUpper = role.toUpperCase();
+    return this.http.post<User>(`${environment.baseUrl}users`, {
+      username: username,
+      password: password,
+      role: roleUpper,
+      fullname: fullname,
+      avatarurl: ""
+    })
+  }
+
   getUserState(): User | null {
     if (!this.userState$ || !this.userState$.value) return null;
     const decoded = this.userState$.value.token && jwtDecode(this.userState$.value.token) as User;

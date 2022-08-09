@@ -1,21 +1,25 @@
 <div class="body-page">
   <mat-card>
-    <mat-card-title>User Login</mat-card-title>
+    <mat-card-title style="margin-bottom: 20px; margin-top: 10px">Login</mat-card-title>
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field>
           <mat-label>Username</mat-label>
           <input matInput placeholder="Username" required formControlName="username">
           <mat-error>Username is required!</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field>
           <mat-label>Password</mat-label>
           <input matInput type="password" required placeholder="Password" formControlName="password">
           <mat-error>Password is required!</mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit">Login</button>
       </form>
+      <div style="margin-top: 10px">
+        <button mat-button color="primary" style="float: left" (click)="signup()">SignUp</button>
+        <button mat-button color="accent" style="float: right">Forgot Password</button>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
