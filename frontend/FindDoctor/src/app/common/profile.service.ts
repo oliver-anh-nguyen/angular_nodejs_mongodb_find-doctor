@@ -27,11 +27,7 @@ export class ProfileService {
     return this.http.get<ProfileDoctor>(`${environment.baseUrl}doctors/${username}`);
   }
 
-  updateDoctorInfo(username: string, fullname: string, avatar: string, phone: string) {
-    return this.http.patch(`${environment.baseUrl}doctors/${username}/update`, {
-      fullname: fullname,
-      avatarurl: avatar,
-      phone: phone
-    })
+  updateDoctorInfo(username: string, data: any) {
+    return this.http.patch(`${environment.baseUrl}doctors/${username}`, data)
   }
 }
