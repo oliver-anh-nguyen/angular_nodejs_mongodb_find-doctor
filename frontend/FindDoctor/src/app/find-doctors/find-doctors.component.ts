@@ -34,9 +34,9 @@ export class FindDoctorsComponent implements OnInit {
   stepHour = 1;
   stepMinute = 10;
   stepSecond = 1;
-  // dateControl = new FormControl(new Date());
   dateControl = new UntypedFormControl();
   selectedTime: moment.Moment = moment(new Date());
+  searchedSpecialty: String = "Dentist";
 
   commonSearches: Array<String>
 
@@ -105,10 +105,17 @@ export class FindDoctorsComponent implements OnInit {
     });
   }
 
+  capitalizeFirstLetter(s: String) {
+    if (s.length == 0) return s;
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
   searchDoctors() {
     console.log('Going to search doctor')
     console.log(this.selectedSpecialty);
     console.log(this.searchForm.value);
+    this.searchedSpecialty = this.selectedSpecialty as String;
+    this.searchedSpecialty = this.capitalizeFirstLetter(this.selectedSpecialty as String);
     this.findDoctorService.searchDoctors(this.selectedSpecialty, this.selectedState).subscribe(
       doctors => {
         console.log(doctors);
@@ -118,6 +125,7 @@ export class FindDoctorsComponent implements OnInit {
   }
 
   searchCommonDoctors(specialty: String) {
+    this.searchedSpecialty = this.capitalizeFirstLetter(specialty);
     specialty = specialty.toLowerCase();
     this.findDoctorService.searchDoctors(specialty, null).subscribe(
       doctors => {
