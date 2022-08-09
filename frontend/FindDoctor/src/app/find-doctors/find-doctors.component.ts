@@ -162,6 +162,10 @@ export class FindDoctorsComponent implements OnInit {
     console.log(this.selectedTime.format('YYYY-MM-DDTHH:mm:ss'))
   }
 
+  bookFromMain() {
+    // TODO: implement
+  }
+  
   book() {
     console.log('Do book for doctor', this.detailDoctor);
     console.log(this.dateControl.get)
