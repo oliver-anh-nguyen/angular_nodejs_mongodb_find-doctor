@@ -14,7 +14,7 @@ export class AppComponent implements OnDestroy {
   isLoggedIn: boolean = false;
   sub!: Subscription;
   username: string = '';
-  DEFAULT_AVATAR_URL = 'assets/images/person-black-icon.png';
+  DEFAULT_AVATAR_URL = 'assets/images/default_avatar.jpeg';
   avatarUrl = '';
   constructor(private userService: UserService, private router: Router,
               public loader: LoadingService) {

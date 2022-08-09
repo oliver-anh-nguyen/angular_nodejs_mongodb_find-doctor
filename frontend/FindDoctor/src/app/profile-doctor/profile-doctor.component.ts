@@ -17,7 +17,7 @@ export class ProfileDoctorComponent implements OnInit {
   public doctor:ProfileDoctor | null = null;
   isEdit: boolean = false;
   fullname: string = 'Full Name';
-  avatarUrl = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
+  avatarUrl = 'assets/images/default_avatar.jpeg';
   phone: string = '';
   desc: string = '';
   degrees: string = '';
@@ -46,7 +46,9 @@ export class ProfileDoctorComponent implements OnInit {
       this.profileService.getDoctorInfo(username).subscribe(profile => {
         console.log(profile);
         this.doctor = profile;
-        this.avatarUrl = this.doctor.avatarurl;
+        if (this.doctor.avatarurl) {
+          this.avatarUrl = this.doctor.avatarurl;
+        }
         this.phone = this.doctor.phone;
         this.fullname = this.doctor.fullname;
         this.desc = this.doctor.description;

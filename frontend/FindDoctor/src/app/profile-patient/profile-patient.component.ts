@@ -15,7 +15,7 @@ export class ProfilePatientComponent implements OnInit {
   public patient:ProfilePatient | null = null;
   isEdit: boolean = false;
   fullname: string = 'Full Name';
-  avatarUrl = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
+  avatarUrl = 'assets/images/default_avatar.jpeg';
   phone: string = '';
   isAvatarEditing: boolean = false;
   file: File | null = null;
@@ -33,7 +33,9 @@ export class ProfilePatientComponent implements OnInit {
       this.profileService.getPatientInfo(username).subscribe(profile => {
         console.log(profile);
         this.patient = profile;
-        this.avatarUrl = this.patient.avatarurl;
+        if (this.patient.avatarurl) {
+          this.avatarUrl = this.patient.avatarurl;
+        }
         this.phone = this.patient.phone;
         this.fullname = this.patient.fullname;
       })
